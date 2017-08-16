@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Created by maciek on 8/16/17.
@@ -22,9 +23,9 @@ public class ScraperController {
 
 
     @PostMapping("/fetchwebsite")
-    public String fetchWebsite(@RequestParam String url) throws IOException {
+    public Map<String, Integer> fetchWebsite(@RequestParam String url) throws IOException {
             Document website = webScraperService.getWebsite(url);
-            String websiteBodyInString = webScraperService.parseHtmlDataToString(website);
+            Map<String, Integer> websiteBodyInString = webScraperService.parseHtmlDataToString(website);
         return websiteBodyInString;
     }
 
