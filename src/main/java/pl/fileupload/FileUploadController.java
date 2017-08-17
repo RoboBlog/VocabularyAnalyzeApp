@@ -30,7 +30,7 @@ public class FileUploadController {
         String fileName = storageService.store(file);
         String fileExtension = storageService.getFileExtension(fileName);
         String data = dataService.getData(fileExtension, fileName);
-
+        System.out.print(data);
 
         return "You successfully uploaded " + file.getOriginalFilename() + "!";
     }
