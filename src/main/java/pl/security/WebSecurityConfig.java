@@ -25,8 +25,11 @@ import pl.security.jwt.JWTLoginFilter;
 //@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
     private UserDetailsService userDetailsService;
+
+    public WebSecurityConfig(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
 
     @Override

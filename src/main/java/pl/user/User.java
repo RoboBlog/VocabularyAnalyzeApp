@@ -3,6 +3,7 @@ package pl.user;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 
 @Entity
@@ -24,11 +25,11 @@ public class User implements Serializable {
 
     private String activationCode;
 
-    public User(String username, String password, String email, int enabled) {
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.enabled = enabled;
+        this.activationCode = UUID.randomUUID().toString();
     }
 
     public User(User user) {
@@ -37,8 +38,12 @@ public class User implements Serializable {
         this.email = user.email;
         this.password = user.password;
         this.enabled=user.enabled;
+        this.activationCode = UUID.randomUUID().toString();
     }
 
+    public User(){
+
+    }
     public String getUsername() {
         return username;
     }
