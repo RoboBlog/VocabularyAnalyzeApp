@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.M3'
+		springBootVersion = '2.0.0.M2'
 	}
 	repositories {
 		mavenCentral()
@@ -29,9 +29,20 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile 'com.squareup.okhttp3:okhttp:3.8.1'
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile('org.springframework.boot:spring-boot-starter-security')
 	compile group: 'org.jsoup', name: 'jsoup', version: '1.10.2'
 	compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.10'
+	compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
+	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
 
+//d
+	compile group: 'org.apache.poi', name: 'poi', version: '3.9'
+	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.9'
+	compile group: 'org.apache.poi', name: 'poi-scratchpad', version: '3.9'
+//	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.5.4.RELEASE'
+
+	runtime('mysql:mysql-connector-java')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
