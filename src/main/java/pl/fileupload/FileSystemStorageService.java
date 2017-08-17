@@ -29,7 +29,7 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void store(MultipartFile file) {
+    public String store(MultipartFile file) {
         String filename = StringUtils.cleanPath(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm"))+"-"+file.getOriginalFilename());
         try {
             if (file.isEmpty()) {
@@ -42,7 +42,9 @@ public class FileSystemStorageService implements StorageService {
             }
             Files.copy(file.getInputStream(), this.rootLocation.resolve(filename),
                     StandardCopyOption.REPLACE_EXISTING);
+            return filename;
         }
+
         catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
         }
@@ -60,7 +62,12 @@ public class FileSystemStorageService implements StorageService {
         }
 
     }
-
+    @Override
+    public String getFileExtension(String fileName) {
+        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+            return fileName.substring(fileName.lastIndexOf(".")+1).toLowerCase();
+        else return "";
+    }
     @Override
     public Path load(String filename) {
         return rootLocation.resolve(filename);

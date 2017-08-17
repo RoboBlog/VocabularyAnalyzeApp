@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
  * Created by maciek on 8/16/17.
  */
 @Service
-class AnalyzeDataService {
+public class AnalyzeDataService {
 
-    Map<String, Integer> dataPreparation(String body){
+    public Map<String, Integer> dataPreparation(String body){
         String bodyLowercase = body.toLowerCase().replaceAll("[^a-żA-Ż]", " ");
         List<String> words = Arrays.asList(bodyLowercase.split("\\s+"));
 
