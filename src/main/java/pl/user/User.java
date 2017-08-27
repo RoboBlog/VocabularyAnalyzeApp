@@ -1,8 +1,11 @@
 package pl.user;
 
 
+import pl.translator.Word;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -24,6 +27,28 @@ public class User implements Serializable {
     private int enabled;
 
     private String activationCode;
+
+    @OneToMany//String and translate in code?
+    private List<Word> words;
+
+    public void addWord(Word word){
+        words.add(word);
+    }
+    public List<Word> getWords() {
+        return words;
+    }
+
+    public void setWords(List<Word> words) {
+        this.words = words;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public User(String username, String password, String email) {
         this.username = username;

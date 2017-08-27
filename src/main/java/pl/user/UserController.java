@@ -5,9 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import pl.security.CustomUserDetailsService;
 
-/**
- * Created by maciek on 8/17/17.
- */
 @CrossOrigin(origins = "http://localhost:8000")
 @RestController
 public class UserController {

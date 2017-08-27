@@ -1,8 +1,9 @@
-package pl;
+package pl.datapreparation;
 
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.translator.Word;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,23 +28,11 @@ public class ScraperController {
 
 
     @PostMapping("/fetchwebsite")
-    public Map<String, Integer> fetchWebsite(@RequestParam String url) throws IOException {
+    public Map<Word, Integer> fetchWebsite(@RequestParam String url) throws IOException {
             Document website = webScraperService.getWebsite(url);
             String websiteBodyInString = webScraperService.parseHtmlDataToString(website);
-        Map<String, Integer> stringIntegerMap = analyzeDataService.dataPreparation(websiteBodyInString);
+        Map<Word, Integer> stringIntegerMap = analyzeDataService.dataPreparation(websiteBodyInString);
         return stringIntegerMap;
     }
-
-    @GetMapping("/test")
-    public Map<String, String> test(){
-        Map<String, String> map = new HashMap<>();
-        map.put("test1", "test1message");
-        map.put("test2", "test2message");
-        map.put("test3", "test3message");
-        map.put("test4", "test4message");
-
-        return map;
-    }
-
 
 }

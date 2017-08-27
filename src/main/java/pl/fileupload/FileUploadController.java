@@ -4,12 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pl.AnalyzeDataService;
-import pl.DataService;
+import pl.datapreparation.AnalyzeDataService;
+import pl.datapreparation.DataService;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.spi.FileTypeDetector;
 
 @RestController
 public class FileUploadController {
