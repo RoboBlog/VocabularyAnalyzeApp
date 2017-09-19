@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.datapreparation.AnalyzeDataService;
 import pl.datapreparation.DataService;
 
+import javax.swing.text.BadLocationException;
 import java.io.IOException;
 
 @RestController
@@ -24,12 +25,12 @@ public class FileUploadController {
 
 
     @PostMapping("/up")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
+    public String handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException, BadLocationException {
         String fileName = storageService.store(file);
         String fileExtension = storageService.getFileExtension(fileName);
         String data = dataService.getData(fileExtension, fileName);
         System.out.print(data);
-
+//        analyzeDataService.dataPreparation(data,1);
         return "You successfully uploaded " + file.getOriginalFilename() + "!";
     }
 

@@ -32,8 +32,8 @@ public class DictionaryController {
     }
 
     @DeleteMapping("/delete/word/{id}")
-    public HttpStatus delete(@PathVariable int id){
-
+    public HttpStatus delete(@PathVariable long id){
+        dictionaryService.delete(id);
 
         return HttpStatus.OK;
     }

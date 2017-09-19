@@ -17,47 +17,40 @@ public class AnalyzeDataService {
 
     private final TranslationService translationService;
     private final WordRepository wordRepository;
+
     @Autowired
     public AnalyzeDataService(TranslationService translationService, WordRepository wordRepository) {
         this.translationService = translationService;
         this.wordRepository = wordRepository;
     }
-//
-    public Map<Word, Integer> dataPreparation(String body){
+
+    //
+    public Map<Word, Integer> dataPreparation(String body, int part) {
         String bodyLowercase = body.toLowerCase().replaceAll("[^a-żA-Ż]", " ");
         List<String> words = Arrays.asList(bodyLowercase.split("\\s+"));
-        Map<Word, Integer> wordsMap = new HashMap<>();//variable name
+        Map<Word, Integer> wordsMap = new HashMap<>();
 
-        for(String word : words){
+        for (int i = part * 10 - 10; i < part * 10; i++) {
+//            for(String word:words){//JAVA 8
 
-            if(word.matches(".*\\w.*")) //REGEX
+            if (words.get(i).matches(".*\\w.*")) //REGEX
             {
-                System.out.println(word);
-
-                Word word1 = wordRepository.findByEnglishWord(word);
+                System.out.println(words.get(i));
+                Word word1 = wordRepository.findByEnglishWord(words.get(i));
                 Integer count = wordsMap.get(word1);
-                if(word1!=null) {
-                    wordsMap.put(word1, (count == null)?1:count+1);
+                if (word1 != null) {
+                    wordsMap.put(word1, (count == null) ? 1 : count + 1);
                 }
             }
         }
 
-        Map<Word, Integer> result = wordsMap.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+            Map<Word, Integer> result = wordsMap.entrySet().stream()
+                    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                            (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 
-        return result;
-    }
-
-
-
-
-
-
-
-
-
+            return result;
+        }
 
 
 //    public Map<String, Integer> dataPreparation(String body){
@@ -94,5 +87,6 @@ public class AnalyzeDataService {
 //    }
 
 
+    }
 
-}
+

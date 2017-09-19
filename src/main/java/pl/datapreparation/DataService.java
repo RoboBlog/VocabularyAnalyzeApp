@@ -11,12 +11,17 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.jopendocument.dom.ODPackage;
+import org.jopendocument.dom.ODSingleXMLDocument;
+import org.jopendocument.dom.ODXMLDocument;
+import org.jopendocument.dom.text.Paragraph;
+import org.jopendocument.dom.text.TextDocument;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.rtf.RTFEditorKit;
+import java.io.*;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,7 +35,7 @@ public class DataService {
 
 
     //factory
-    public String getData(String fileExtension, String fileName) throws IOException {
+    public String getData(String fileExtension, String fileName) throws IOException, BadLocationException {
         switch (fileExtension) {
             case "txt":
                 String dataFromTextFile = getDataFromTextFile(fileName);
@@ -44,14 +49,39 @@ public class DataService {
             case "doc":
                 String dataFromDocFile = getDataFromDocFile(fileName);
                 return dataFromDocFile;
-//            case "odt":
-//            case "rtf":
+            case "odt":
+                String dataFromOdtFile = getDataFromOdtFile(fileName);
+                return dataFromOdtFile;
+            case "rtf":
+                String dataFromRtfFile = getDataFromRtfFile(fileName);
+                return dataFromRtfFile;
             default:
                 return "Format is not supported";
         }
     }
 
-     private String getDataFromTextFile(String fileName) throws FileNotFoundException {
+    private String getDataFromRtfFile(String fileName) throws IOException, BadLocationException {
+        RTFEditorKit rtfParser = new RTFEditorKit();
+        Document document = rtfParser.createDefaultDocument();
+        rtfParser.read(new FileInputStream(fileLocation+fileName), document, 0);
+        String text = document.getText(0, document.getLength());
+
+        return text;
+
+    }
+
+    private String getDataFromOdtFile(String fileName) throws IOException {
+        ODPackage file = new ODPackage(new File(fileLocation+fileName));
+        StringBuilder text = new StringBuilder();
+        int paragraphCount=file.getTextDocument().getParagraphCount();
+
+        for(int i = 0; i<paragraphCount; i++){
+            text.append(" ").append(file.getTextDocument().getParagraph(i).toString());
+        }
+        return text.toString();
+    }
+
+    private String getDataFromTextFile(String fileName) throws FileNotFoundException {
         Scanner scanner = new Scanner( new File(fileLocation+fileName), "UTF-8" );
         String text = scanner.useDelimiter("\\A").next();
         scanner.close();
@@ -96,5 +126,4 @@ public class DataService {
         return "file";
     }
 
-    //add odt/rtf
 }

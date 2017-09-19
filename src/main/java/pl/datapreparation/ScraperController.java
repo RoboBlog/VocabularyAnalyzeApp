@@ -28,10 +28,10 @@ public class ScraperController {
 
 
     @PostMapping("/fetchwebsite")
-    public Map<Word, Integer> fetchWebsite(@RequestParam String url) throws IOException {
+    public Map<Word, Integer> fetchWebsite(@RequestParam String url, @RequestParam int part) throws IOException {
             Document website = webScraperService.getWebsite(url);
             String websiteBodyInString = webScraperService.parseHtmlDataToString(website);
-        Map<Word, Integer> stringIntegerMap = analyzeDataService.dataPreparation(websiteBodyInString);
+            Map<Word, Integer> stringIntegerMap = analyzeDataService.dataPreparation(websiteBodyInString, part);
         return stringIntegerMap;
     }
 

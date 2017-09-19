@@ -36,7 +36,9 @@ public class RunAtStart {
     public void runAtStart() throws FileNotFoundException {
         System.out.println("I'am alive");
 
-
+//        User user = new User("maciek", passwordEncoder.encode("maciek"), "Robovlogg@gmail.com");
+//        userRepository.save(user);
+//        197413    
 //        accountActivationService.sendActivationMail(user);
 //        userRepository.save(user);
 //        User user = new User("maciek", passwordEncoder.encode("test"), "robovlogg@gmail.com");
@@ -65,8 +67,9 @@ public class RunAtStart {
 //
 //        List<Word> words1 = maciek.getWords();
 //        System.out.println(words1);
-////
-//        File file = new File("/home/maciek/Words/TEST/Full2.txt");
+/////home/maciek/DATA/WordsDataset/Audio/full.txt
+
+//        File file = new File("/home/maciek/DATA/WordsDataset/translate/FULL.txt");
 //        Scanner scanner = new Scanner(file, "UTF-8");
 //        String text = scanner.useDelimiter("\\A").next();
 //        scanner.close();
@@ -84,6 +87,34 @@ public class RunAtStart {
 //            Word wordd = new Word(english,polish);
 //            wordRepository.save(wordd);
 //            System.out.println(i);
+//        try {
+//            File file = new File("/home/maciek/DATA/WordsDataset/Audio/part2.txt");
+//            Scanner scanner = new Scanner(file, "UTF-8");
+//            String text = scanner.useDelimiter("\\A").next();
+//            scanner.close();
+//            int i = 0;
+//
+//            List<String> words = Arrays.asList(text.split("\n"));
+//            for (String word : words) {
+//                String[] englishandpolish = word.split("}");
+//                String english = englishandpolish[0];
+//                String audioUk = englishandpolish[1];
+//                String audioUS = englishandpolish[2];
+////                System.out.println("Word "+english+"uk "+audioUk+" us "+audioUS);
+////                System.out.println();
+////                System.out.println("English = " + english);
+////                System.out.println("Link = " + audio);
+//                i = i + 1;
+//                Word byEnglishWord = wordRepository.findByEnglishWord(english);
+//                byEnglishWord.setUrlAudioUk(audioUk);
+//                byEnglishWord.setUrlAudioUs(audioUS);
+//                wordRepository.save(byEnglishWord);
+//                System.out.println(i);
+//            }
+//        }
+//        catch(Exception e) {
+//            System.out.println("COS SIE ZJEBALO I TO POWAZNIE");
 //        }
     }
+//    }
 }

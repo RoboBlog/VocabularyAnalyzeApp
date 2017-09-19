@@ -2,8 +2,6 @@ package pl.translator;
 
 
 import javax.persistence.*;
-import java.util.LinkedList;
-import java.util.List;
 
 @Entity
 public class Word {
@@ -12,6 +10,16 @@ public class Word {
     private Long id;
     private String englishWord;
     private String polishWord;
+    private String urlAudioUk;
+    private String urlAudioUs;
+
+
+    public Word(String englishWord, String polishWord, String urlAudioUk, String urlAudioUs) {
+        this.englishWord = englishWord;
+        this.polishWord = polishWord;
+        this.urlAudioUk = urlAudioUk;
+        this.urlAudioUs = urlAudioUs;
+    }
 
     public Word(String englishWord, String polishWord) {
         this.englishWord = englishWord;
@@ -19,6 +27,22 @@ public class Word {
     }
 
     public Word() {
+    }
+
+    public String getUrlAudioUk() {
+        return urlAudioUk;
+    }
+
+    public void setUrlAudioUk(String urlAudioUk) {
+        this.urlAudioUk = urlAudioUk;
+    }
+
+    public String getUrlAudioUs() {
+        return urlAudioUs;
+    }
+
+    public void setUrlAudioUs(String urlAudioUs) {
+        this.urlAudioUs = urlAudioUs;
     }
 
     public Long getId() {
@@ -51,6 +75,8 @@ public class Word {
                 "id=" + id +
                 ", englishWord='" + englishWord + '\'' +
                 ", polishWord='" + polishWord + '\'' +
+                ", urlAudioUk='" + urlAudioUk + '\'' +
+                ", urlAudioUs='" + urlAudioUs + '\'' +
                 '}';
     }
 }

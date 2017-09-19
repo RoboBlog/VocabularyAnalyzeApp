@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import pl.translator.Word;
 import pl.translator.WordRepository;
 import pl.user.User;
+import pl.user.UserRepository;
 import pl.user.UserService;
 
-import javax.persistence.Column;
 import java.util.List;
 
 /**
@@ -17,14 +17,15 @@ import java.util.List;
 public class DictionaryService {
     private final UserService userService;
     private final WordRepository wordRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public DictionaryService(UserService userService, WordRepository wordRepository) {
+    public DictionaryService(UserService userService, WordRepository wordRepository, UserRepository userRepository) {
         this.userService = userService;
         this.wordRepository = wordRepository;
+        this.userRepository = userRepository;
     }
 
-    @Column
     public List<Word> getAll(){
         User user = userService.getUser();
         List<Word> words = user.getWords();
@@ -35,12 +36,16 @@ public class DictionaryService {
         User user = userService.getUser();
         Word word = wordRepository.findById(wordId);
         user.addWord(word);
-    }//HttpResponse in controller? A serwis, w ktorym dodajemy cos do bazy [powinien byc void czy jakos inaczej?
+        userRepository.save(user);
+    }
 
-    public void delete(){
-
+    public void delete(long wordId){
+        User user = userService.getUser();
+        Word word = wordRepository.findById(wordId);
+        user.deleteWord(word);
+        userRepository.save(user);
     }
 
 
-    //metody tutaj powine byc nazwane. NOWA SUPER METODA COS TAM czy po prostu po nazwie pakietu mozna domyslic sie  kontekstu
+
 }
