@@ -27,6 +27,5 @@ public class SignUpController {
     public void signUp(@RequestBody @Valid User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-//        return ResponseS
     }
 }

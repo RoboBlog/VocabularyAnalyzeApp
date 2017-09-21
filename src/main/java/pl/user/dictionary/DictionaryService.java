@@ -10,42 +10,41 @@ import pl.user.UserService;
 
 import java.util.List;
 
-/**
- * Created by maciek on 8/25/17.
- */
 @Service
 public class DictionaryService {
+    private final UserRepository userRepository;
     private final UserService userService;
     private final WordRepository wordRepository;
-    private final UserRepository userRepository;
+    private final UserDictionariesService userDictionariesService;
 
     @Autowired
-    public DictionaryService(UserService userService, WordRepository wordRepository, UserRepository userRepository) {
+    public DictionaryService(UserRepository userRepository, UserService userService, WordRepository wordRepository, UserDictionariesService userDictionariesService) {
+        this.userRepository = userRepository;
         this.userService = userService;
         this.wordRepository = wordRepository;
-        this.userRepository = userRepository;
+        this.userDictionariesService = userDictionariesService;
     }
 
-    public List<Word> getAll(){
-        User user = userService.getUser();
-        List<Word> words = user.getWords();
+    public List<Word> getAll(long dictionaryId){
+        UserDictionary dictionary = userDictionariesService.getDictionary(dictionaryId);
+        List<Word> words = dictionary.getWords();
         return words;
     }
 
-    public void add(long wordId){
-        User user = userService.getUser();
+    public void add(long dictionaryId, long wordId){
+//        User user = userService.getUser();
+        //SECURRITY
+        UserDictionary dictionary = userDictionariesService.getDictionary(dictionaryId);
         Word word = wordRepository.findById(wordId);
-        user.addWord(word);
-        userRepository.save(user);
+        dictionary.addWord(word);
+        userDictionariesService.save(dictionary);
     }
 
-    public void delete(long wordId){
-        User user = userService.getUser();
+    public void delete(long dictionaryId, long wordId){
+        UserDictionary dictionary = userDictionariesService.getDictionary(dictionaryId);
         Word word = wordRepository.findById(wordId);
-        user.deleteWord(word);
-        userRepository.save(user);
+        dictionary.removeWord(word);
+        userDictionariesService.save(dictionary);
     }
-
-
 
 }

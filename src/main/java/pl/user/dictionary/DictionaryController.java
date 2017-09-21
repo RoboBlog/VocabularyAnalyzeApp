@@ -1,5 +1,6 @@
 package pl.user.dictionary;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -8,34 +9,40 @@ import pl.translator.Word;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user/dictionary/")
+@RequestMapping("/api/user/dictionary/")
 public class DictionaryController {
 
-    private final  DictionaryService dictionaryService;
+    private final DictionaryService dictionaryService;
+    private final UserDictionariesService userDictionariesService;
 
     @Autowired
-    public DictionaryController(DictionaryService dictionaryService) {
+    public DictionaryController(DictionaryService dictionaryService, UserDictionariesService userDictionariesService) {
         this.dictionaryService = dictionaryService;
+        this.userDictionariesService = userDictionariesService;
     }
 
-
-    @GetMapping("/words/{language}/get/all")
-    public List<Word> getAll(@PathVariable String language){
-        List<Word> words =  dictionaryService.getAll();
-        return words;
+    @GetMapping("/get/all")
+    public List<UserDictionary> getAllDictionaries(){
+        List<UserDictionary> allDictionaries = userDictionariesService.getAllDictionaries();
+        return allDictionaries;
     }
 
-    @GetMapping("/add/word/{id}")//get?
-    public HttpStatus add(@PathVariable long id){
-        dictionaryService.add(id);
-        return HttpStatus.OK;
+    @GetMapping("/get/{dictionaryId}/all")
+    public List<Word> getAll(@PathVariable long dictionaryId){
+        List<Word> allWords = dictionaryService.getAll(dictionaryId);
+        return allWords;
     }
 
-    @DeleteMapping("/delete/word/{id}")
-    public HttpStatus delete(@PathVariable long id){
-        dictionaryService.delete(id);
+    @PostMapping("/add/{dictionaryId}/{wordId}")
+    public void add(@PathVariable long dictionaryId, @PathVariable long wordId){
+        dictionaryService.add(dictionaryId, wordId);
+//        return HttpStatus.OK;
+    }
 
-        return HttpStatus.OK;
+    @DeleteMapping("/delete/{dictionaryId}/{wordId}")
+    public void delete(@PathVariable long dictionaryId, @PathVariable long wordId){
+        dictionaryService.delete(dictionaryId, wordId);
+//        return HttpStatus.OK;
     }
 
 

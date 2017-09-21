@@ -31,7 +31,8 @@ public class FileUploadController {
         String data = dataService.getData(fileExtension, fileName);
         System.out.print(data);
 //        analyzeDataService.dataPreparation(data,1);
-        return "You successfully uploaded " + file.getOriginalFilename() + "!";
+        return data;
+//        return "You successfully uploaded " + file.getOriginalFilename() + "!";
     }
 
 

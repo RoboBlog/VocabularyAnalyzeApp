@@ -3,6 +3,7 @@ package pl.user;
 
 import org.hibernate.validator.constraints.Email;
 import pl.translator.Word;
+import pl.user.dictionary.UserDictionary;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -34,21 +35,15 @@ public class User implements Serializable {
 
     private String activationCode;
 
-    @OneToMany//String and translate in code?
-    private List<Word> words;
+    @OneToMany
+    private List<UserDictionary> dictionaries;
 
-    public void addWord(Word word){
-        words.add(word);
-    }
-    public void deleteWord(Word word){
-        words.remove(word);
-    }
-    public List<Word> getWords() {
-        return words;
+    public List<UserDictionary> getDictionaries() {
+        return dictionaries;
     }
 
-    public void setWords(List<Word> words) {
-        this.words = words;
+    public void setDictionaries(List<UserDictionary> dictionaries) {
+        this.dictionaries = dictionaries;
     }
 
     public Long getId() {
