@@ -43,6 +43,9 @@ public class DataService {
             case "pdf":
                 String dataFromPdfFile = getDataFromPdfFile(fileName);
                 return dataFromPdfFile;
+            case "docm":
+                String dataFromDocmFile = getDataFromDocxFile(fileName);
+                return dataFromDocmFile;
             case "docx":
                 String dataFromDocxFile = getDataFromDocxFile(fileName);
                 return dataFromDocxFile;
@@ -119,11 +122,9 @@ public class DataService {
         HWPFDocument document = new HWPFDocument(file);
         WordExtractor extractor = new WordExtractor(document);
         String text = extractor.getText();
-
-        System.out.print(text);
         file.close();
 
-        return "file";
+        return text;
     }
 
 }
