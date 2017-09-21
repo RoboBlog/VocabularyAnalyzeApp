@@ -1,10 +1,15 @@
 package pl.datapreparation;
 
+import org.hibernate.validator.constraints.URL;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.translator.Word;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +20,7 @@ import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:8000")
 @RestController
+@Validated
 public class ScraperController {
 
     private final WebScraperService webScraperService;
@@ -28,7 +34,7 @@ public class ScraperController {
 
 
     @PostMapping("/fetchwebsite")
-    public Map<Word, Integer> fetchWebsite(@RequestParam String url, @RequestParam int part) throws IOException {
+    public Map<Word, Integer> fetchWebsite(@NotNull @URL @RequestParam String url, @RequestParam int part) throws IOException {
             Document website = webScraperService.getWebsite(url);
             String websiteBodyInString = webScraperService.parseHtmlDataToString(website);
             Map<Word, Integer> stringIntegerMap = analyzeDataService.dataPreparation(websiteBodyInString, part);

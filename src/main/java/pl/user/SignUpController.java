@@ -1,11 +1,13 @@
 package pl.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.xml.ws.Response;
 
 @CrossOrigin(origins = "http://localhost:8000")
 @RestController
@@ -21,10 +23,10 @@ public class SignUpController {
     }
 
 
-    @RequestMapping("/signup")
-    public void signUp(@RequestBody User user){
-        //validation
+    @PostMapping("/signup")
+    public void signUp(@RequestBody @Valid User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+//        return ResponseS
     }
 }

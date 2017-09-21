@@ -1,9 +1,11 @@
 package pl.user;
 
 
+import org.hibernate.validator.constraints.Email;
 import pl.translator.Word;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
@@ -17,11 +19,15 @@ public class User implements Serializable {
     @Column(name="userid")
     private Long id;
 
+    @NotNull
     @Column(name = "username", unique = true)
     private String username;
 
+    @NotNull
     private String password;
 
+    @Email
+    @NotNull
     private String email;
 
     private int enabled;
@@ -33,6 +39,9 @@ public class User implements Serializable {
 
     public void addWord(Word word){
         words.add(word);
+    }
+    public void deleteWord(Word word){
+        words.remove(word);
     }
     public List<Word> getWords() {
         return words;
