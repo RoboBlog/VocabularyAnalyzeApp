@@ -1,10 +1,7 @@
 package pl.user.dictionary;
 
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.translator.Word;
 
 import java.util.List;
 
@@ -28,8 +25,8 @@ public class DictionaryController {
     }
 
     @GetMapping("/get/{dictionaryId}/all")
-    public List<Word> getAll(@PathVariable long dictionaryId){
-        List<Word> allWords = dictionaryService.getAll(dictionaryId);
+    public List<UserWord> getAll(@PathVariable long dictionaryId){
+        List<UserWord> allWords = dictionaryService.getAll(dictionaryId);
         return allWords;
     }
 

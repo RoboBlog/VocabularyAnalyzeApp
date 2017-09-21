@@ -1,7 +1,4 @@
 package pl.user.dictionary;
-
-import pl.translator.Word;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,8 +8,8 @@ public class UserDictionary {
     @GeneratedValue
     private long id;
 
-    @OneToMany//prepare entity?
-    private List<Word> words;
+    @OneToMany
+    private List<UserWord> words;
 
     public long getId() {
         return id;
@@ -22,18 +19,19 @@ public class UserDictionary {
         this.id = id;
     }
 
-    public void addWord(Word word){
+    public void addWord(UserWord word){
         words.add(word);
     }
 
-    public void removeWord(Word word){
+    public void removeWord(UserWord word){
         words.remove(word);
     }
-    public List<Word> getWords() {
+
+    public List<UserWord> getWords() {
         return words;
     }
 
-    public void setWords(List<Word> words) {
+    public void setWords(List<UserWord> words) {
         this.words = words;
     }
 }
