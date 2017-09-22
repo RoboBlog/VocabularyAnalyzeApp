@@ -1,7 +1,9 @@
 package pl.user;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.Email;
+import pl.other.Views;
 import pl.translator.Word;
 import pl.user.dictionary.UserDictionary;
 
@@ -18,30 +20,40 @@ public class User implements Serializable {
     @Id
     @GeneratedValue
     @Column(name="userid")
+    @JsonView(Views.Internal.class)
     private Long id;
 
     @NotNull
     @Column(name = "username", unique = true)
+    @JsonView(Views.Public.class)
     private String username;
 
     @NotNull
+    @JsonView(Views.Internal.class)
     private String password;
 
     @Email
     @NotNull
+    @JsonView(Views.Public.class)
     private String email;
 
+    @JsonView(Views.Internal.class)
     private int enabled;
 
+    @JsonView(Views.Internal.class)
     private String activationCode;
 
     @OneToMany
+    @JsonView(Views.Public.class)
     private List<UserDictionary> dictionaries;
 
     public List<UserDictionary> getDictionaries() {
         return dictionaries;
     }
 
+    public void addDictionaries(UserDictionary dictionary){
+        this.dictionaries.add(dictionary);
+    }
     public void setDictionaries(List<UserDictionary> dictionaries) {
         this.dictionaries = dictionaries;
     }

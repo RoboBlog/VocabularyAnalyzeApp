@@ -34,8 +34,24 @@ public class UserDictionariesService {
         return dictionaries;
     }
 
+    //TODO REPAIR IT !
+    public void addDictionary(String name){
+        User user = userService.getUser();
+        UserDictionary dictionary = new UserDictionary(name);
+        user.addDictionaries(dictionary);
+        userDictionaryRepository.save(dictionary);
+        userRepository.save(user);
+
+    }
+
+    public void removeDictionary(long dictionaryId){
+        //TODO SECURITY
+        UserDictionary dictionary = userDictionaryRepository.getById(dictionaryId);
+        userDictionaryRepository.delete(dictionary);
+    }
+
     public UserDictionary getDictionary(long dictionaryId){
-        //SECURITY
+        //TODO SECURITY
         UserDictionary dictionary = userDictionaryRepository.getById(dictionaryId);
         return dictionary;
     }

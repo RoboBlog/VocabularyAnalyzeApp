@@ -18,25 +18,34 @@ public class DictionaryController {
         this.userDictionariesService = userDictionariesService;
     }
 
-    @GetMapping("/get/all")
+    @GetMapping("/all")
     public List<UserDictionary> getAllDictionaries(){
         List<UserDictionary> allDictionaries = userDictionariesService.getAllDictionaries();
         return allDictionaries;
     }
 
-    @GetMapping("/get/{dictionaryId}/all")
+    @PostMapping("/")
+    public void addDictionary(@RequestParam String dictionaryName){
+        userDictionariesService.addDictionary(dictionaryName);
+    }
+    @DeleteMapping("/")
+    public void removeDictionary(@RequestParam long dictionaryId){
+        userDictionariesService.removeDictionary(dictionaryId);
+    }
+
+    @GetMapping("/{dictionaryId}/all")
     public List<UserWord> getAll(@PathVariable long dictionaryId){
         List<UserWord> allWords = dictionaryService.getAll(dictionaryId);
         return allWords;
     }
 
-    @PostMapping("/add/{dictionaryId}/{wordId}")
+    @PostMapping("/{dictionaryId}/{wordId}")
     public void add(@PathVariable long dictionaryId, @PathVariable long wordId){
         dictionaryService.add(dictionaryId, wordId);
 //        return HttpStatus.OK;
     }
 
-    @DeleteMapping("/delete/{dictionaryId}/{wordId}")
+    @DeleteMapping("/{dictionaryId}/{wordId}")
     public void delete(@PathVariable long dictionaryId, @PathVariable long wordId){
         dictionaryService.delete(dictionaryId, wordId);
 //        return HttpStatus.OK;

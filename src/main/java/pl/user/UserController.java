@@ -1,11 +1,15 @@
 package pl.user;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import pl.other.Views;
 import pl.security.CustomUserDetailsService;
 
+
 @CrossOrigin(origins = "http://localhost:8000")
+@RequestMapping("/api/user/")
 @RestController
 public class UserController {
 
@@ -17,7 +21,8 @@ public class UserController {
         this.customUserDetailsService = customUserDetailsService;
     }
 
-    @GetMapping("/user")
+    @JsonView(Views.Public.class)
+    @GetMapping("/")
     public User getLoggedUser(){
         User user = userService.getUser();
         return user;
