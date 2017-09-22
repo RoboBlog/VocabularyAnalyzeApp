@@ -13,6 +13,8 @@ public class UserDictionary {
     @OneToMany
     private List<UserWord> words;
 
+    public UserDictionary() {
+    }
 
     public UserDictionary(String name) {
         this.name = name;

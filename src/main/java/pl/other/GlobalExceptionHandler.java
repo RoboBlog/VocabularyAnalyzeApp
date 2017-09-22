@@ -29,12 +29,12 @@ public class GlobalExceptionHandler {
                 .collect(Collectors.toList()));
     }
 
-    @ExceptionHandler
-    @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, Integer> handle(Exception e){
-        return Collections.singletonMap("error", 500);
-    }
+//    @ExceptionHandler
+//    @ResponseBody
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    public Map<String, Integer> handle(Exception e){
+//        return Collections.singletonMap("error", 500);
+//    }
 
     @ExceptionHandler
     @ResponseBody

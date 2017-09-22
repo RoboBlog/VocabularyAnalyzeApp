@@ -17,6 +17,9 @@ public class UserWord {
     private int learningLevel;
     private boolean isKnow;
 
+    public UserWord() {
+    }
+
     public UserWord(Word word) {
         this.word = word;
         this.learningLevel = 0;

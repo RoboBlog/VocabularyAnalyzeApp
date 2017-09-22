@@ -1,11 +1,13 @@
 package pl.user.dictionary;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping("/api/user/dictionary/")
 public class DictionaryController {
 
@@ -35,6 +37,7 @@ public class DictionaryController {
 
     @GetMapping("/{dictionaryId}/all")
     public List<UserWord> getAll(@PathVariable long dictionaryId){
+        System.out.println(dictionaryId);
         List<UserWord> allWords = dictionaryService.getAll(dictionaryId);
         return allWords;
     }
