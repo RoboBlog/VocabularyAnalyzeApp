@@ -47,6 +47,12 @@ public class User implements Serializable {
     @JsonView(Views.Public.class)
     private List<UserDictionary> dictionaries;
 
+    @JsonView(Views.Public.class)
+    private long amountWords;
+
+    @JsonView(Views.Public.class)
+    private long amountKnownWords;
+
     public List<UserDictionary> getDictionaries() {
         return dictionaries;
     }
@@ -71,6 +77,8 @@ public class User implements Serializable {
         this.password = password;
         this.email = email;
         this.activationCode = UUID.randomUUID().toString();
+        this.amountWords=0;
+        this.amountKnownWords=0;
     }
 
     public User(User user) {
@@ -79,7 +87,26 @@ public class User implements Serializable {
         this.email = user.email;
         this.password = user.password;
         this.enabled=user.enabled;
+        this.amountWords=0;
+        this.amountKnownWords=0;
         this.activationCode = UUID.randomUUID().toString();
+    }
+
+
+    public long getAmountWords() {
+        return amountWords;
+    }
+
+    public void setAmountWords(long amountWords) {
+        this.amountWords = amountWords;
+    }
+
+    public long getAmountKnownWords() {
+        return amountKnownWords;
+    }
+
+    public void setAmountKnownWords(long amountKnownWords) {
+        this.amountKnownWords = amountKnownWords;
     }
 
     public User(){

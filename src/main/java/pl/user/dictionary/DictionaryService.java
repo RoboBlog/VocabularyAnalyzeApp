@@ -16,14 +16,16 @@ public class DictionaryService {
     private final UserWordRepository userWordRepository;
     private final UserDictionariesService userDictionariesService;
     private final WordRepository wordRepository;
+    private final LearnService learnService;
 
     @Autowired
-    public DictionaryService(UserRepository userRepository, UserService userService, UserWordRepository userWordRepository, UserDictionariesService userDictionariesService, WordRepository wordRepository) {
+    public DictionaryService(UserRepository userRepository, UserService userService, UserWordRepository userWordRepository, UserDictionariesService userDictionariesService, WordRepository wordRepository, LearnService learnService) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.userWordRepository = userWordRepository;
         this.userDictionariesService = userDictionariesService;
         this.wordRepository = wordRepository;
+        this.learnService = learnService;
     }
 
     public List<UserWord> getAll(long dictionaryId){
@@ -43,6 +45,7 @@ public class DictionaryService {
         userWordRepository.save(userWord);
         dictionary.addWord(userWord);
         userDictionariesService.save(dictionary);
+        learnService.incrementationAmountWords();
     }
 
     public void delete(long dictionaryId, long wordId){
