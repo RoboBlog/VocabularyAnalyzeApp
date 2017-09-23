@@ -22,18 +22,18 @@ public class FlashcardsService {
         this.dictionariesService = dictionariesService;
     }
 
-    //TODO SECURITY
+    //TODO SECURITY. //NULL
     public Word getFlashcard(long dictionaryId){
-        User user = userService.getUser();
+//        User user = userService.getUser();
         UserDictionary dictionary = dictionariesService.getDictionary(dictionaryId);
         List<UserWord> words = dictionary.getWords();
         int rand = randomLong(words.size());
         return words.get(rand).getWord();
     }
 
-    int randomLong(long max){
-        Random random = new Random(max+1);
-        int randomLong = random.nextInt();
+    private int randomLong(int max){
+        Random random = new Random();
+        int randomLong = random.nextInt(max+1);
         return randomLong;
     }
 }
