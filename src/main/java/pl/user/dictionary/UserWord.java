@@ -14,7 +14,7 @@ public class UserWord {
     private long id;
     @OneToOne
     private Word word;
-    private int learningLevel;
+    private int correctness;
     private boolean isKnow;
 
     public UserWord() {
@@ -22,7 +22,7 @@ public class UserWord {
 
     public UserWord(Word word) {
         this.word = word;
-        this.learningLevel = 0;
+        this.correctness = 0;
         this.isKnow = false;
     }
 
@@ -42,12 +42,12 @@ public class UserWord {
         this.word = word;
     }
 
-    public int getLearningLevel() {
-        return learningLevel;
+    public int getCorrectness() {
+        return correctness;
     }
 
-    public void setLearningLevel(int learningLevel) {
-        this.learningLevel = learningLevel;
+    public void setCorrectness(int correctness) {
+        this.correctness = correctness;
     }
 
     public boolean isKnow() {

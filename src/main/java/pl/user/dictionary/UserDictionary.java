@@ -1,6 +1,7 @@
 package pl.user.dictionary;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,7 +12,7 @@ public class UserDictionary {
     @NotNull
     private String name;
     @OneToMany
-    private List<UserWord> words;
+    private List<UserWord> words =  new ArrayList<>();
 
     public UserDictionary() {
     }

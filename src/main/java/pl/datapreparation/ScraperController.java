@@ -5,11 +5,10 @@ import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pl.translator.Word;
 
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 /**
  * Created by maciek on 8/16/17.
@@ -31,10 +30,10 @@ public class ScraperController {
 
 
     @PostMapping("/fetchwebsite")
-    public Map<Word, Integer> fetchWebsite(@NotNull @URL @RequestParam String url) throws IOException {
+    public List<ResultWord> fetchWebsite(@NotNull @URL @RequestParam String url) throws IOException {
             Document website = webScraperService.getWebsite(url);
             String websiteBodyInString = webScraperService.parseHtmlDataToString(website);
-            Map<Word, Integer> stringIntegerMap = analyzeDataService.dataPreparation(websiteBodyInString);
+            List<ResultWord> stringIntegerMap = analyzeDataService.dataPreparation(websiteBodyInString);
         return stringIntegerMap;
     }
 

@@ -26,6 +26,14 @@ public class Word {
         this.polishWord = polishWord;
     }
 
+    public Word(long id, String englishWord, String polishWord) {
+        this.id=id;
+        this.englishWord = englishWord;
+        this.polishWord = polishWord;
+    }
+
+
+
     public Word() {
     }
 

@@ -4,12 +4,14 @@ package pl.user;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.Email;
 import pl.other.Views;
+import pl.quiz.Quiz;
 import pl.translator.Word;
 import pl.user.dictionary.UserDictionary;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,6 +54,21 @@ public class User implements Serializable {
 
     @JsonView(Views.Public.class)
     private long amountKnownWords;
+
+    @OneToMany
+    @JsonView(Views.Public.class)
+    private List<Quiz> quizes = new ArrayList<>();
+
+    public void addQuiz(Quiz quiz){
+        quizes.add(quiz);
+    }
+    public List<Quiz> getQuizes() {
+        return quizes;
+    }
+
+    public void setQuizes(List<Quiz> quizes) {
+        this.quizes = quizes;
+    }
 
     public List<UserDictionary> getDictionaries() {
         return dictionaries;

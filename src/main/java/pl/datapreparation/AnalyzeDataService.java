@@ -15,16 +15,14 @@ import java.util.stream.Collectors;
 @Service
 public class AnalyzeDataService {
 
-    private final TranslationService translationService;
     private final WordRepository wordRepository;
 
     @Autowired
-    public AnalyzeDataService(TranslationService translationService, WordRepository wordRepository) {
-        this.translationService = translationService;
+    public AnalyzeDataService(WordRepository wordRepository) {
         this.wordRepository = wordRepository;
     }
     
-    public Map<Word, Integer> dataPreparation(String body){
+    public List<ResultWord> dataPreparation(String body){
         String bodyLowercase = body.toLowerCase().replaceAll("[^a-żA-Ż]", " ");
         List<String> words = Arrays.asList(bodyLowercase.split("\\s+"));
         Map<String, Integer> map = new HashMap<>();
@@ -37,7 +35,7 @@ public class AnalyzeDataService {
         Map<Word, Integer> result = new HashMap<>();
 
         List<Word> allByEnglishWord = wordRepository.findByEnglishWordIn(words);
-        System.out.println(allByEnglishWord);
+//        System.out.println(allByEnglishWord);
         allByEnglishWord.forEach(word ->{
            String englishWord = word.getEnglishWord();
            Integer integer = map.get(englishWord.toLowerCase());
@@ -48,9 +46,16 @@ public class AnalyzeDataService {
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+        //TODO FIX IT
+        List<ResultWord> resultWords = new LinkedList<>();
 
-        return result2;
+        result2.forEach((r,k)->{
+            resultWords.add(new ResultWord(r, k));
+        });
+
+        return resultWords;
     }
 }
+
 
 
