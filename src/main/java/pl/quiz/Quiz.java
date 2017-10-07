@@ -13,9 +13,14 @@ public class Quiz {
     private long id;
     @OneToOne
     private UserDictionary userDictionary;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Exercise> exercises = new ArrayList<>();
     private boolean done;
+
+    public Quiz(List<Exercise> exercises) {
+        this.exercises = exercises;
+        this.done = false;
+    }
 
     public Quiz() {
         this.done = false;
@@ -56,5 +61,15 @@ public class Quiz {
 
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    @Override
+    public String toString() {
+        return "Quiz{" +
+                "id=" + id +
+                ", userDictionary=" + userDictionary +
+                ", exercises=" + exercises +
+                ", done=" + done +
+                '}';
     }
 }

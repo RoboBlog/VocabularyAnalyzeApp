@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.translator.Word;
 import pl.translator.WordRepository;
+import pl.user.User;
 import pl.user.UserRepository;
 import pl.user.UserService;
 
@@ -36,7 +37,7 @@ public class DictionaryService {
 
 
     public void add(long dictionaryId, long wordId){
-//        User user = userService.getUser();
+        User user = userService.getUser();
         //SECURITY
         UserDictionary dictionary = userDictionariesService.getDictionary(dictionaryId);
         //add word

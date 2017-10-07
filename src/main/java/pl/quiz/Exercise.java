@@ -1,8 +1,11 @@
 package pl.quiz;
 
+import pl.user.dictionary.UserWord;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Exercise {
@@ -10,23 +13,26 @@ public class Exercise {
     @GeneratedValue
     private long id;
     private boolean isCorrect;
-    private String englishWord;
-    private String polishWord;
+    @ManyToOne
+    private UserWord userWord;
     private String answer;
 
+    public Exercise() {
+    }
 
-    public Exercise(String englishWord, String polishWord) {
+    public Exercise(UserWord userWord, String answer) {
+        this.userWord = userWord;
+        this.answer = answer;
         this.isCorrect = false;
-        this.englishWord = englishWord;
-        this.polishWord = polishWord;
+    }
+
+    public Exercise(UserWord userWord) {
+        this.userWord = userWord;
+        this.isCorrect = false;
     }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public boolean isCorrect() {
@@ -37,6 +43,14 @@ public class Exercise {
         isCorrect = correct;
     }
 
+    public UserWord getUserWord() {
+        return userWord;
+    }
+
+    public void setUserWord(UserWord userWord) {
+        this.userWord = userWord;
+    }
+
     public String getAnswer() {
         return answer;
     }
@@ -45,19 +59,13 @@ public class Exercise {
         this.answer = answer;
     }
 
-    public String getEnglishWord() {
-        return englishWord;
-    }
-
-    public void setEnglishWord(String englishWord) {
-        this.englishWord = englishWord;
-    }
-
-    public String getPolishWord() {
-        return polishWord;
-    }
-
-    public void setPolishWord(String polishWord) {
-        this.polishWord = polishWord;
+    @Override
+    public String toString() {
+        return "Exercise{" +
+                "id=" + id +
+                ", isCorrect=" + isCorrect +
+                ", userWord=" + userWord +
+                ", answer='" + answer + '\'' +
+                '}';
     }
 }

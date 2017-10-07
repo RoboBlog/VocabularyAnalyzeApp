@@ -1,7 +1,6 @@
 package pl.user.dictionary;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,13 +42,13 @@ public class DictionaryController {
     }
 
     @PostMapping("/{dictionaryId}/{wordId}")
-    public void add(@PathVariable long dictionaryId, @PathVariable long wordId){
+    public void addWord(@PathVariable long dictionaryId, @PathVariable long wordId) {
         dictionaryService.add(dictionaryId, wordId);
 //        return HttpStatus.OK;
     }
 
     @DeleteMapping("/{dictionaryId}/{wordId}")
-    public void delete(@PathVariable long dictionaryId, @PathVariable long wordId){
+    public void deleteWord(@PathVariable long dictionaryId, @PathVariable long wordId) {
         dictionaryService.delete(dictionaryId, wordId);
 //        return HttpStatus.OK;
     }

@@ -25,7 +25,7 @@ public class MyBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoi
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        setRealmName("SpotifySocial");
+        setRealmName("VocApp");
         super.afterPropertiesSet();
     }
 }

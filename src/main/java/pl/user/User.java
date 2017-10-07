@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.Email;
 import pl.other.Views;
 import pl.quiz.Quiz;
-import pl.translator.Word;
 import pl.user.dictionary.UserDictionary;
 
 import javax.persistence.*;
@@ -58,6 +57,10 @@ public class User implements Serializable {
     @OneToMany
     @JsonView(Views.Public.class)
     private List<Quiz> quizes = new ArrayList<>();
+
+//    public UserDictionary getDictionary(dic){
+//        dictionaries.
+//    }
 
     public void addQuiz(Quiz quiz){
         quizes.add(quiz);

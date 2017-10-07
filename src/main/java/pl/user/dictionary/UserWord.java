@@ -2,27 +2,25 @@ package pl.user.dictionary;
 
 import pl.translator.Word;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class UserWord {
     @Id
     @GeneratedValue
     private long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Word word;
     private int correctness;
     private boolean isKnow;
 
+
     public UserWord() {
+
     }
 
     public UserWord(Word word) {
         this.word = word;
-        this.correctness = 0;
         this.isKnow = false;
     }
 
@@ -56,5 +54,15 @@ public class UserWord {
 
     public void setKnow(boolean know) {
         isKnow = know;
+    }
+
+    @Override
+    public String toString() {
+        return "UserWord{" +
+                "id=" + id +
+                ", word=" + word +
+                ", correctness=" + correctness +
+                ", isKnow=" + isKnow +
+                '}';
     }
 }

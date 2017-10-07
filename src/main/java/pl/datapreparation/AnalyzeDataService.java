@@ -2,16 +2,13 @@ package pl.datapreparation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.translator.TranslationService;
 import pl.translator.Word;
 import pl.translator.WordRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Created by maciek on 8/16/17.
- */
+
 @Service
 public class AnalyzeDataService {
 
@@ -35,7 +32,6 @@ public class AnalyzeDataService {
         Map<Word, Integer> result = new HashMap<>();
 
         List<Word> allByEnglishWord = wordRepository.findByEnglishWordIn(words);
-//        System.out.println(allByEnglishWord);
         allByEnglishWord.forEach(word ->{
            String englishWord = word.getEnglishWord();
            Integer integer = map.get(englishWord.toLowerCase());

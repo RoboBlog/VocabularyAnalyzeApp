@@ -24,3 +24,4 @@ dist/
 nbdist/
 .nb-gradle/
 /INFO
+/src/main/java/pl/other/TestController.java
