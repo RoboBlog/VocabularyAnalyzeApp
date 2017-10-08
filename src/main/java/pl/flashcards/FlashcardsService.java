@@ -3,14 +3,13 @@ package pl.flashcards;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.translator.Word;
-import pl.user.User;
 import pl.user.UserService;
 import pl.user.dictionary.UserDictionariesService;
 import pl.user.dictionary.UserDictionary;
 import pl.user.dictionary.UserWord;
 
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class FlashcardsService {
@@ -27,13 +26,9 @@ public class FlashcardsService {
 //        User user = userService.getUser();
         UserDictionary dictionary = dictionariesService.getDictionary(dictionaryId);
         List<UserWord> words = dictionary.getWords();
-        int rand = randomLong(words.size());
+        int rand = ThreadLocalRandom.current().nextInt(words.size());
+        System.out.println("RAND " + rand);
         return words.get(rand).getWord();
     }
 
-    private int randomLong(int max){
-        Random random = new Random();
-        int randomLong = random.nextInt(max+1);
-        return randomLong;
-    }
 }

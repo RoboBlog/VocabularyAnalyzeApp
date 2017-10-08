@@ -3,16 +3,21 @@ package pl.other;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import pl.quiz.ExerciseRepository;
 import pl.translator.Word;
 import pl.translator.WordRepository;
-import pl.user.*;
+import pl.user.AccountActivationService;
+import pl.user.User;
+import pl.user.UserRepository;
+import pl.user.dictionary.UserDictionary;
+import pl.user.dictionary.UserDictionaryRepository;
+import pl.user.dictionary.UserWord;
+import pl.user.dictionary.UserWordRepository;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Created by maciek on 8/17/17.
@@ -23,21 +28,65 @@ public class RunAtStart {
     private final UserRepository userRepository;
     private final AccountActivationService accountActivationService;
     private final WordRepository wordRepository;
+    private final UserWordRepository userWordRepository;
+    private final ExerciseRepository exerciseRepository;
+    private final UserDictionaryRepository userDictionaryRepository;
 
     @Autowired
-    public RunAtStart(PasswordEncoder passwordEncoder, UserRepository userRepository, AccountActivationService accountActivationService, WordRepository wordRepository) throws FileNotFoundException {
+    public RunAtStart(PasswordEncoder passwordEncoder, UserRepository userRepository, AccountActivationService accountActivationService, WordRepository wordRepository, UserWordRepository userWordRepository, ExerciseRepository exerciseRepository, UserDictionaryRepository userDictionaryRepository) throws FileNotFoundException {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.accountActivationService = accountActivationService;
         this.wordRepository = wordRepository;
+        this.userWordRepository = userWordRepository;
+        this.exerciseRepository = exerciseRepository;
+        this.userDictionaryRepository = userDictionaryRepository;
     }
 
     @PostConstruct
     public void runAtStart() throws FileNotFoundException {
         System.out.println("I'am alive");
 
-//        User user = new User("maciek", passwordEncoder.encode("maciek"), "Robovlogg@gmail.com");
-//        userRepository.save(user);
+
+//        Exercise exercise = new Exercise(byId);
+//        exerciseRepository.save(exercise);
+
+        User user = new User("maciek", passwordEncoder.encode("maciek"), "Robovlogg@gmail.com");
+        userRepository.save(user);
+
+
+        List<UserWord> userWords = new LinkedList<>();
+        Word word = new Word("test", "test1");
+        Word word1 = new Word("teest", "test1");
+
+        UserWord userWord = new UserWord(word);
+        UserWord userWord1 = new UserWord(word1);
+        userWordRepository.save(userWord);
+        userWordRepository.save(userWord1);
+
+//        Exercise exercise = new Exercise(userWord);
+//        List<Exercise> exercises = new LinkedList<>();
+//        exercises.add(exercise);
+//        Quiz quiz = new Quiz();
+
+
+        List<UserWord> all1 = userWordRepository.findAll();
+
+        UserDictionary userDictionary = new UserDictionary("test");
+        userDictionary.addWord(all1.get(0));
+        userDictionary.addWord(all1.get(1));
+        userDictionaryRepository.save(userDictionary);
+        List<UserDictionary> all = userDictionaryRepository.findAll();
+        System.out.println("ID " + all.get(0).getId());
+
+//        exerciseRepository.save(exercises);
+//        userWords.add(userWord);
+//        UserDictionary userDictionary = new UserDictionary("quiz1");
+//        userDictionary.setWords(userWords);
+//        userDictionaryRepository.save(userDictionary);
+//        System.out.println(userDictionary.getId());
+
+
 //        197413    
 //        accountActivationService.sendActivationMail(user);
 //        userRepository.save(user);

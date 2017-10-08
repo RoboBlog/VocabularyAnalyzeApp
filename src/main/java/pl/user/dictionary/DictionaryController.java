@@ -29,6 +29,7 @@ public class DictionaryController {
     public void addDictionary(@RequestParam String dictionaryName){
         userDictionariesService.addDictionary(dictionaryName);
     }
+
     @DeleteMapping("/")
     public void removeDictionary(@RequestParam long dictionaryId){
         userDictionariesService.removeDictionary(dictionaryId);

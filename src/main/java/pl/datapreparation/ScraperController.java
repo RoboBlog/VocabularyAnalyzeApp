@@ -4,7 +4,10 @@ import org.hibernate.validator.constraints.URL;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
@@ -34,6 +37,8 @@ public class ScraperController {
             Document website = webScraperService.getWebsite(url);
             String websiteBodyInString = webScraperService.parseHtmlDataToString(website);
             List<ResultWord> stringIntegerMap = analyzeDataService.dataPreparation(websiteBodyInString);
+        System.out.println(stringIntegerMap);
+
         return stringIntegerMap;
     }
 

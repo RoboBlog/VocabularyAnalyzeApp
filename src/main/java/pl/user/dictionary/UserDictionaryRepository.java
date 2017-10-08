@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDictionaryRepository extends JpaRepository<UserDictionary, Long>{
     UserDictionary getById(long id);
+//    List<UserDictionary> getAll();
 }

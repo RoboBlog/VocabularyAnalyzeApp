@@ -9,7 +9,6 @@ import pl.user.dictionary.UserDictionary;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -17,7 +16,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class User {
     @Id
     @GeneratedValue
     @Column(name="userid")
