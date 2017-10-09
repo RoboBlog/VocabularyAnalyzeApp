@@ -50,9 +50,15 @@ public class RunAtStart {
 
 //        Exercise exercise = new Exercise(byId);
 //        exerciseRepository.save(exercise);
-
         User user = new User("maciek", passwordEncoder.encode("maciek"), "Robovlogg@gmail.com");
+        user.setDayScore(10);
         userRepository.save(user);
+//        for(int i = 0; i<10000; i++) {
+//            User user = new User("maciek"+i, "maciek", "Robovlogg@gmail.com");
+//            user.setDayScore(10);
+//            userRepository.save(user);
+//            System.out.println(i);
+//        }
 
 
         List<UserWord> userWords = new LinkedList<>();
@@ -75,9 +81,11 @@ public class RunAtStart {
         UserDictionary userDictionary = new UserDictionary("test");
         userDictionary.addWord(all1.get(0));
         userDictionary.addWord(all1.get(1));
+        userDictionary.addWord(all1.get(1));
         userDictionaryRepository.save(userDictionary);
         List<UserDictionary> all = userDictionaryRepository.findAll();
         System.out.println("ID " + all.get(0).getId());
+//        System.out.println(all);
 
 //        exerciseRepository.save(exercises);
 //        userWords.add(userWord);
