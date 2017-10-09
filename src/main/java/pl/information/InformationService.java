@@ -14,12 +14,12 @@ public class InformationService {
 
     //admin
     public List<Information> getAllInformations() {
-        List<Information> allInformations = informationRepository.getAll();
+        List<Information> allInformations = informationRepository.findAll();
         return allInformations;
     }
 
     public List<Information> getAllActiveInformations() {
-        List<Information> allActiveInformations = informationRepository.getAllByActiveTrue();
+        List<Information> allActiveInformations = informationRepository.findAllByIsActiveTrue();
         return allActiveInformations;
     }
 

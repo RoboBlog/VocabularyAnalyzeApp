@@ -18,6 +18,7 @@ public class Information {
     private LocalDateTime createDate;
 
     public Information() {
+        this.createDate = LocalDateTime.now();
     }
 
     public Information(String content) {
