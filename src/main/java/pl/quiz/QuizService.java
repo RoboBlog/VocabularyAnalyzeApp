@@ -3,6 +3,7 @@ package pl.quiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.translator.Word;
+import pl.user.ScoreService;
 import pl.user.User;
 import pl.user.UserRepository;
 import pl.user.UserService;
@@ -14,6 +15,7 @@ import pl.user.dictionary.UserWord;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
@@ -24,15 +26,17 @@ public class QuizService {
     private final UserDictionaryRepository userDictionaryRepository;
     private final QuizRepository quizRepository;
     private final ExerciseRepository exerciseRepository;
+    private final ScoreService scoreService;
 
     @Autowired
-    public QuizService(UserDictionariesService userDictionariesService, UserService userService, UserRepository userRepository, UserDictionaryRepository userDictionaryRepository, QuizRepository quizRepository, ExerciseRepository exerciseRepository) {
+    public QuizService(UserDictionariesService userDictionariesService, UserService userService, UserRepository userRepository, UserDictionaryRepository userDictionaryRepository, QuizRepository quizRepository, ExerciseRepository exerciseRepository, ScoreService scoreService) {
         this.userDictionariesService = userDictionariesService;
         this.userService = userService;
         this.userRepository = userRepository;
         this.userDictionaryRepository = userDictionaryRepository;
         this.quizRepository = quizRepository;
         this.exerciseRepository = exerciseRepository;
+        this.scoreService = scoreService;
     }
 
     public List<Quiz> getAllQuizes(){
@@ -47,7 +51,7 @@ public class QuizService {
 //        User user = userService.getUser();
 
         UserDictionary dictionary = userDictionariesService.getDictionary(dictionaryId);
-        List<UserWord> words = dictionary.getWords();
+        Set<UserWord> words = dictionary.getWords();
 
         Quiz quiz = new Quiz();
 
@@ -96,6 +100,7 @@ public class QuizService {
             if (Objects.equals(word.getEnglishWord(), answer)) {
                 exercise.setCorrect(true);
                 userWord.setCorrectness(userWord.getCorrectness() + 1);
+                scoreService.addOneScore();
             } else {
                 exercise.setCorrect(false);
                 userWord.setCorrectness(userWord.getCorrectness() - 1);
@@ -106,7 +111,7 @@ public class QuizService {
             if (Objects.equals(word.getPolishWord(), answer)) {
                 exercise.setCorrect(true);
                 userWord.setCorrectness(userWord.getCorrectness() + 1);
-
+                scoreService.addOneScore();
             } else {
                 exercise.setCorrect(false);
                 userWord.setCorrectness(userWord.getCorrectness() - 1);
