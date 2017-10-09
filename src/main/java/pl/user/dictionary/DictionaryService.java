@@ -8,7 +8,7 @@ import pl.user.User;
 import pl.user.UserRepository;
 import pl.user.UserService;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class DictionaryService {
@@ -29,9 +29,9 @@ public class DictionaryService {
         this.learnService = learnService;
     }
 
-    public List<UserWord> getAll(long dictionaryId){
+    public Set<UserWord> getAll(long dictionaryId) {
         UserDictionary dictionary = userDictionariesService.getDictionary(dictionaryId);
-        List<UserWord> words = dictionary.getWords();
+        Set<UserWord> words = dictionary.getWords();
         return words;
     }
 

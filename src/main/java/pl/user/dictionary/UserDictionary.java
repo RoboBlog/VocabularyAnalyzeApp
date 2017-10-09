@@ -5,8 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class UserDictionary {
@@ -18,7 +18,7 @@ public class UserDictionary {
 
     //TODO unique
     @OneToMany
-    private List<UserWord> words =  new ArrayList<>();
+    private Set<UserWord> words = new HashSet<>();
 
     public UserDictionary() {
     }
@@ -51,12 +51,32 @@ public class UserDictionary {
         words.remove(word);
     }
 
-    public List<UserWord> getWords() {
+    public Set<UserWord> getWords() {
         return words;
     }
 
-    public void setWords(List<UserWord> words) {
+    public void setWords(Set<UserWord> words) {
         this.words = words;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserDictionary that = (UserDictionary) o;
+
+        if (id != that.id) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        return words != null ? words.equals(that.words) : that.words == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (words != null ? words.hashCode() : 0);
+        return result;
     }
 
     @Override

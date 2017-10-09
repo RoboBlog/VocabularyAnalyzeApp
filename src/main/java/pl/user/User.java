@@ -9,6 +9,7 @@ import pl.user.dictionary.UserDictionary;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -53,6 +54,15 @@ public class User {
     @JsonView(Views.Public.class)
     private long amountKnownWords;
 
+    @JsonView(Views.Public.class)
+    private long score;
+
+    @JsonView(Views.Public.class)
+    private long dayScore;
+
+    @JsonView(Views.Public.class)
+    private LocalDateTime createDate;
+
     @OneToMany
     @JsonView(Views.Public.class)
     private List<Quiz> quizes = new ArrayList<>();
@@ -91,6 +101,15 @@ public class User {
         this.id = id;
     }
 
+    public User() {
+        this.amountWords = 0;
+        this.amountKnownWords = 0;
+        this.activationCode = UUID.randomUUID().toString();
+        this.score = 0;
+        this.dayScore = 0;
+        this.createDate = LocalDateTime.now();
+    }
+
     public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
@@ -98,6 +117,10 @@ public class User {
         this.activationCode = UUID.randomUUID().toString();
         this.amountWords=0;
         this.amountKnownWords=0;
+        this.score = 0;
+        this.dayScore = 0;
+        this.createDate = LocalDateTime.now();
+
     }
 
     public User(User user) {
@@ -109,8 +132,35 @@ public class User {
         this.amountWords=0;
         this.amountKnownWords=0;
         this.activationCode = UUID.randomUUID().toString();
+        this.score = 0;
+        this.dayScore = 0;
+        this.createDate = LocalDateTime.now();
     }
 
+
+    public long getScore() {
+        return score;
+    }
+
+    public void setScore(long score) {
+        this.score = score;
+    }
+
+    public long getDayScore() {
+        return dayScore;
+    }
+
+    public void setDayScore(long dayScore) {
+        this.dayScore = dayScore;
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
 
     public long getAmountWords() {
         return amountWords;
@@ -128,9 +178,6 @@ public class User {
         this.amountKnownWords = amountKnownWords;
     }
 
-    public User(){
-
-    }
     public String getUsername() {
         return username;
     }

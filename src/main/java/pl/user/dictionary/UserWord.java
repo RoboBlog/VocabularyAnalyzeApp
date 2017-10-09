@@ -57,6 +57,28 @@ public class UserWord {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserWord userWord = (UserWord) o;
+
+        if (id != userWord.id) return false;
+        if (correctness != userWord.correctness) return false;
+        if (isKnow != userWord.isKnow) return false;
+        return word != null ? word.equals(userWord.word) : userWord.word == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (word != null ? word.hashCode() : 0);
+        result = 31 * result + correctness;
+        result = 31 * result + (isKnow ? 1 : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "UserWord{" +
                 "id=" + id +

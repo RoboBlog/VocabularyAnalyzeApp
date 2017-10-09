@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
@@ -36,9 +37,9 @@ public class DictionaryController {
     }
 
     @GetMapping("/{dictionaryId}/all")
-    public List<UserWord> getAll(@PathVariable long dictionaryId){
+    public Set<UserWord> getAll(@PathVariable long dictionaryId) {
         System.out.println(dictionaryId);
-        List<UserWord> allWords = dictionaryService.getAll(dictionaryId);
+        Set<UserWord> allWords = dictionaryService.getAll(dictionaryId);
         return allWords;
     }
 
