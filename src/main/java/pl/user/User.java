@@ -5,24 +5,27 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.Email;
 import pl.other.Views;
 import pl.quiz.Quiz;
+import pl.security.Authority;
 import pl.user.dictionary.UserDictionary;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="userid")
     @JsonView(Views.Internal.class)
-    private Long id;
+    private Long userId;
 
     @NotNull
     @Column(name = "username", unique = true)
@@ -39,7 +42,7 @@ public class User {
     private String email;
 
     @JsonView(Views.Internal.class)
-    private int enabled;
+    private boolean enabled;
 
     @JsonView(Views.Internal.class)
     private String activationCode;
@@ -67,8 +70,40 @@ public class User {
     @JsonView(Views.Public.class)
     private List<Quiz> quizes = new ArrayList<>();
 
-//    public UserDictionary getDictionary(dic){
-//        dictionaries.
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastPasswordResetDate;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_authority",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "userid")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
+    private List<Authority> authorities;
+
+//    public static long getSerialVersionUID() {
+//        return serialVersionUID;
+//    }
+
+    public User(User user) {
+        this.userId = user.userId;
+        this.username = user.username;
+        this.email = user.email;
+        this.password = user.password;
+        this.enabled = user.enabled;
+        this.amountWords = 0;
+        this.amountKnownWords = 0;
+        this.activationCode = UUID.randomUUID().toString();
+        this.score = 0;
+        this.dayScore = 0;
+        this.createDate = LocalDateTime.now();
+    }
+
+    public List<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    //    public UserDictionary getDictionary(dic){
+//        dictionaries.@
 //    }
 
     public void addQuiz(Quiz quiz){
@@ -93,12 +128,12 @@ public class User {
         this.dictionaries = dictionaries;
     }
 
-    public Long getId() {
-        return id;
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getUserId() {
+        return userId;
     }
 
     public User() {
@@ -123,20 +158,17 @@ public class User {
 
     }
 
-    public User(User user) {
-        this.id = user.id;
-        this.username = user.username;
-        this.email = user.email;
-        this.password = user.password;
-        this.enabled=user.enabled;
-        this.amountWords=0;
-        this.amountKnownWords=0;
-        this.activationCode = UUID.randomUUID().toString();
-        this.score = 0;
-        this.dayScore = 0;
-        this.createDate = LocalDateTime.now();
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
+
+    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
+    }
 
     public long getScore() {
         return score;
@@ -202,11 +234,11 @@ public class User {
         this.email = email;
     }
 
-    public int getEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(int enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 

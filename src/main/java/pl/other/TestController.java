@@ -1,5 +1,6 @@
 package pl.other;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -152,6 +153,12 @@ public class TestController {
         userDictionaryRepository.save(userDictionary);
         System.out.println(userDictionary.getId());
 
+    }
+
+    @GetMapping("/role")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public String testRole() {
+        return "TEST IS COMPLETE";
     }
 
     @GetMapping("/{dictionaryId}")

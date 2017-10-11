@@ -2,10 +2,9 @@ package pl.user;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import pl.other.Views;
-import pl.security.CustomUserDetailsService;
+//import pl.security.CustomUserDetailsService;
 
 
 @CrossOrigin(origins = "http://localhost:8000")
@@ -14,11 +13,11 @@ import pl.security.CustomUserDetailsService;
 public class UserController {
 
     private final UserService userService;
-    private final CustomUserDetailsService customUserDetailsService;
+
+    //    private final CustomUserDetailsService customUserDetailsService;
     @Autowired
-    public UserController(UserService userService, CustomUserDetailsService customUserDetailsService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.customUserDetailsService = customUserDetailsService;
     }
 
     @JsonView(Views.Public.class)
@@ -38,12 +37,12 @@ public class UserController {
         userService.editMail(mail);
     }
 
-    @GetMapping("/get/role")
-    public void getRole(){
-        String username = userService.getUsername();
-        UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
-        System.out.println(userDetails.getAuthorities());
-
-    }
+//    @GetMapping("/get/role")
+//    public void getRole(){
+//        String username = userService.getUsername();
+//        UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+//        System.out.println(userDetails.getAuthorities());
+//
+//    }
 
 }
