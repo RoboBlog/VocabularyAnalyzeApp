@@ -13,12 +13,6 @@ import java.io.IOException;
 @Service
  class WebScraperService{
 
-    private AnalyzeDataService analyzeDataService;
-
-    WebScraperService(AnalyzeDataService analyzeDataService) {
-        this.analyzeDataService = analyzeDataService;
-    }
-
     Document getWebsite(String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
         return doc;
@@ -29,12 +23,5 @@ import java.io.IOException;
         String data = body.text();
 //         Map<String, Integer> strings = analyzeDataService.dataPreparation(data);
          return data;
-    }
-
-    public String getData() {
-//        Document website = getWebsite();
-//        String stringIntegerMap = parseHtmlDataToString(website);
-//
-        return "stringIntegerMap";
     }
 }

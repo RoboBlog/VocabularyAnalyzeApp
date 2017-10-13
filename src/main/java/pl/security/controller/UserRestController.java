@@ -1,6 +1,7 @@
 package pl.security.controller;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,7 @@ import pl.security.JwtUser;
 
 import javax.servlet.http.HttpServletRequest;
 
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 public class UserRestController {
 

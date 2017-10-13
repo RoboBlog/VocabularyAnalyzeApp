@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 //import org.springframework.security.crypto.password.PasswordEncoder;
-
-@CrossOrigin(origins = "http://localhost:8000")
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 public class SignUpController {
 

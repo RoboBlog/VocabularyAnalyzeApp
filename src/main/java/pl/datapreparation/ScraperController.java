@@ -17,7 +17,7 @@ import java.util.List;
  * Created by maciek on 8/16/17.
  */
 
-@CrossOrigin(origins = "http://localhost:8000")
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @Validated
 public class ScraperController {

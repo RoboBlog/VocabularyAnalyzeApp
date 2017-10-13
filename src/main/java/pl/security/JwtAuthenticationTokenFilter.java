@@ -20,7 +20,7 @@ import java.io.IOException;
 
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
-    private final Log logger = LogFactory.getLog(this.getClass());
+//    private final Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -40,12 +40,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             authToken = requestHeader.substring(7);
             try {
                 username = jwtTokenUtil.getUsernameFromToken(authToken);
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | ExpiredJwtException e) {
                 logger.error("an error occured during getting username from token", e);
-            } catch (ExpiredJwtException e) {
-                logger.warn("the token is expired and not valid anymore", e);
             }
-        } else {
+        }
+        else {
             logger.warn("couldn't find bearer string, will ignore the header");
         }
 

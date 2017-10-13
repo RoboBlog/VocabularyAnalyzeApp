@@ -7,8 +7,8 @@ import pl.other.Views;
 //import pl.security.CustomUserDetailsService;
 
 
-@CrossOrigin(origins = "http://localhost:8000")
-@RequestMapping("/api/user/")
+@CrossOrigin(origins = "http://localhost:8081")
+@RequestMapping("/api/user")
 @RestController
 public class UserController {
 
