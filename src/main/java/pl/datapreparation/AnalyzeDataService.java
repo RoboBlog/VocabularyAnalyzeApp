@@ -20,14 +20,17 @@ public class AnalyzeDataService {
     }
     
     public List<ResultWord> dataPreparation(String body){
-        String bodyLowercase = body.toLowerCase().replaceAll("[^a-żA-Ż]", " ");
+        String bodyLowercase = body.toLowerCase().replaceAll("[^a-zA-Z]", " ");
         List<String> words = Arrays.asList(bodyLowercase.split("\\s+"));
         Map<String, Integer> map = new HashMap<>();
 
         for(String word : words){
             Integer count = map.get(word);
             map.put(word,(count==null)?1:count+1);
+
         }
+        System.out.println(map);
+
 
         Map<Word, Integer> result = new HashMap<>();
 
@@ -37,6 +40,8 @@ public class AnalyzeDataService {
            Integer integer = map.get(englishWord.toLowerCase());
            result.put(word, integer);
         });
+
+        System.out.println(result);
 
         Map<Word, Integer> result2 = result.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))

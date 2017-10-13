@@ -1,10 +1,7 @@
 package pl.security.controller;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.security.JwtTokenUtil;
 import pl.security.JwtUser;
 
@@ -23,7 +20,7 @@ public class UserRestController {
         this.userDetailsService = userDetailsService;
     }
 
-    @RequestMapping(value = "user", method = RequestMethod.GET)
+    @GetMapping("/user")
     public JwtUser getAuthenticatedUser(HttpServletRequest request) {
         String token = request.getHeader("Authorization").substring(7);
         String username = jwtTokenUtil.getUsernameFromToken(token);

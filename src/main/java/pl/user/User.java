@@ -11,10 +11,7 @@ import pl.user.dictionary.UserDictionary;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 @Entity
@@ -78,7 +75,7 @@ public class User {
             name = "user_authority",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "userid")},
             inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
-    private List<Authority> authorities;
+    private List<Authority> authorities = new LinkedList<>();
 
 //    public static long getSerialVersionUID() {
 //        return serialVersionUID;
@@ -105,6 +102,10 @@ public class User {
     //    public UserDictionary getDictionary(dic){
 //        dictionaries.@
 //    }
+
+    public void addAuthority(Authority authority){
+        this.authorities.add(authority);
+    }
 
     public void addQuiz(Quiz quiz){
         quizes.add(quiz);
