@@ -8,7 +8,9 @@ import pl.user.dictionary.UserDictionariesService;
 import pl.user.dictionary.UserDictionary;
 import pl.user.dictionary.UserWord;
 
+import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class FlashcardsService {
@@ -20,17 +22,25 @@ public class FlashcardsService {
         this.dictionariesService = dictionariesService;
     }
 
-    //TODO SECURITY. SET-RANDOM
+    //TODO SECURITY.
     public Word getFlashcard(long dictionaryId){
-//        User user = userService.getUser();
         UserDictionary dictionary = dictionariesService.getDictionary(dictionaryId);
         Set<UserWord> words = dictionary.getWords();
-//        int rand = ThreadLocalRandom.current().nextInt(words.size());
-//        System.out.println("RAND " + rand);
-//        Collections.shuffle(words);
-        return words.iterator().next().getWord();
-//        return words.get(rand).getWord();
-//        return words.iterator(
+        UserWord randomUserWord = getRandomUserWord(words);
+
+        return randomUserWord.getWord();
     }
 
+    private UserWord getRandomUserWord(Set<UserWord> words){
+        int rand = ThreadLocalRandom.current().nextInt(words.size());
+        int i = 0;
+        UserWord randomWord = null;
+        for(UserWord rw : words) {
+            if (i == rand) {
+                randomWord = rw;
+            }
+            i++;
+        }
+        return randomWord;
+    }
 }
