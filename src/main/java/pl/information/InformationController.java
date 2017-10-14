@@ -1,7 +1,10 @@
 package pl.information;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -15,9 +18,10 @@ public class InformationController {
         this.informationService = informationService;
     }
 
-    //admin
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/all")
-    public List<Information> getAllInformations() {
+    public List<Information> getAllInformations(Authentication authentication) {
+        System.out.println(authentication.getAuthorities());
         List<Information> allInformations = informationService.getAllInformations();
         return allInformations;
     }
@@ -29,14 +33,15 @@ public class InformationController {
         return allActiveInformations;
     }
 
-    //admin
-    //TODO ADD VALIDATION
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/add")
-    public void addInformation(@RequestBody Information information) {
-        informationService.addInformation(information);
+    public void addInformation(@RequestBody @Valid Information information, Authentication authentication) {
+        String name = authentication.getName();
+        informationService.addInformation(information, name);
     }
 
-    //admin
+    //TODO put vs post
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PutMapping("/edit/{informationId}")
     public void updateInformation(@RequestBody Information information, @PathVariable long informationId) {
         informationService.updateInformation(information, informationId);

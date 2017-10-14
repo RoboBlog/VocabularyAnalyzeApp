@@ -24,7 +24,9 @@ public class InformationService {
     }
 
     //admin
-    public void addInformation(Information information) {
+    public void addInformation(Information information, String name) {
+        information.setActive(true);
+        information.setAuthor(name);
         informationRepository.save(information);
     }
 
@@ -37,7 +39,7 @@ public class InformationService {
 
     public void deactivateInformation(Information information) {
         information.setActive(false);
-        //save?
+        informationRepository.save(information);
     }
 
     public void activeInformation(Information information) {

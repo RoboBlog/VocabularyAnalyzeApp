@@ -72,7 +72,7 @@ public class QuizService {
         List<Exercise> exercises = quiz.getExercises();
         long sizeAfterFilter = getSizeAfterFilter(exercises);
 
-        if (sizeAfterFilter > 1) {
+        if (sizeAfterFilter > 0) {
             Optional<Exercise> exercise = exercises
                     .stream()
                     .filter(exercise1 -> !exercise1.isCorrect())
@@ -82,7 +82,7 @@ public class QuizService {
             return exercise.get();
         } else {
             quiz.setDone(true);
-// TODO quizRepository.save(quiz); //it is necessary?
+        // TODO quizRepository.save(quiz); //it is necessary?
             System.out.println("Quiz is done");
             return new Exercise();
         }

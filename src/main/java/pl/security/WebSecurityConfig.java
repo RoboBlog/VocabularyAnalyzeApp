@@ -26,6 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtAuthenticationEntryPoint unauthorizedHandler;
     private final UserDetailsService userDetailsService;
 
+
     public WebSecurityConfig(JwtAuthenticationEntryPoint unauthorizedHandler, UserDetailsService userDetailsService) {
         this.unauthorizedHandler = unauthorizedHandler;
         this.userDetailsService = userDetailsService;
@@ -55,16 +56,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers(HttpMethod.OPTIONS,
+                            "/**"
+                ).permitAll()
+
                 .antMatchers("/actuator/**").hasRole("ADMIN")
+                
                 .antMatchers(
                         HttpMethod.GET,
                         "/"
                 ).permitAll()
+
                 .antMatchers(
                         HttpMethod.POST,
                         "/auth"
                 ).permitAll()
+
+                .antMatchers(
+                        HttpMethod.POST,
+                        "/signup"
+                ).permitAll()
+
                 .antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated();
 

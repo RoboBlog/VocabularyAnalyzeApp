@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Random;
 
 @CrossOrigin(origins = "http://localhost:8081")
-
 @RestController
 @RequestMapping("/api/quiz/")
 public class QuizController {
@@ -36,18 +34,25 @@ public class QuizController {
         Quiz newQuiz = quizService.createNewQuiz(dictionaryId);
         return newQuiz;
     }
+
+    //ENUM
+    @PostMapping("/{exerciseId}")
+    public String checkAnswer(@PathVariable long exerciseId, @RequestParam String answer, @RequestParam String type){
+        String response = quizService.checkAnswer(exerciseId, answer, type);
+        return response;
+    }
 //
 
-    @GetMapping("/{dictionaryId}/")
-    public int quiz() {
+//    @GetMapping("/{dictionaryId}/")
+//    public int quiz() {
 //        Quiz quiz = new Quiz();
-        Random r = new Random();
-        int max = 10;
-        int min = 2;
+//        Random r = new Random();
+//        int max = 10;
+//        int min = 2;
 //        int wordNumber = r.nextInt((max - min)+1) + min;
-        int wordNumber = r.nextInt(max + 1);
-        return wordNumber;
+//        int wordNumber = r.nextInt(max + 1);
+//        return wordNumber;
 //        Exercise exercise = new Exercise()
 //        return "quiz";
-    }
+//    }
 }

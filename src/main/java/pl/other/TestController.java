@@ -1,10 +1,7 @@
 package pl.other;
 
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.quiz.Exercise;
 import pl.quiz.ExerciseRepository;
 import pl.quiz.Quiz;
@@ -20,6 +17,9 @@ import pl.user.dictionary.UserWordRepository;
 import java.util.HashSet;
 import java.util.Set;
 
+
+
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/")
 public class TestController {
@@ -40,6 +40,10 @@ public class TestController {
         this.scoreService = scoreService;
     }
 
+    @GetMapping("/database")
+    public void database(){
+
+    }
 //    @GetMapping("/add")
 //    public void add(){
 //        scoreService.addOneScore();
@@ -72,20 +76,20 @@ public class TestController {
 //        wordRepository.save(word7);
 //        wordRepository.save(word8);
 //        wordRepository.save(word9);
-        Set<UserWord> userWords = new HashSet<>();
+//        Set<UserWord> userWords = new HashSet<>();
 
 
-        for (int i = 0; i < 10; i++) {
-            Word word = new Word("test" + i, "test1");
-//            wordRepository.save(word);
-
-            UserWord userWord = new UserWord(word);
-            userWordRepository.save(userWord);
-
-            userWords.add(userWord);
-            System.out.println(i);
-
-        }
+//        for (int i = 0; i < 10; i++) {
+//            Word word = new Word("test" + i, "test1");
+////            wordRepository.save(word);
+//
+//            UserWord userWord = new UserWord(word);
+//            userWordRepository.save(userWord);
+//
+//            userWords.add(userWord);
+//            System.out.println(i);
+//
+//        }
 //        UserWord userWord1 = new UserWord(word1);
 //        UserWord userWord2 = new UserWord(word2);
 //        UserWord userWord3 = new UserWord(word3);
@@ -148,10 +152,10 @@ public class TestController {
 //        userWords.add(byId9);
 
 
-        UserDictionary userDictionary = new UserDictionary("quiz1");
-        userDictionary.setWords(userWords);
-        userDictionaryRepository.save(userDictionary);
-        System.out.println(userDictionary.getId());
+//        UserDictionary userDictionary = new UserDictionary("quiz1");
+//        userDictionary.setWords(userWords);
+//        userDictionaryRepository.save(userDictionary);
+//        System.out.println(userDictionary.getId());
 
     }
 

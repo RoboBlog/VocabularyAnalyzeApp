@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,6 +14,7 @@ public class Information {
     private long id;
     private boolean isActive;
     private String author;
+    @NotNull
     @Lob
     private String content;
     private LocalDateTime createDate;
