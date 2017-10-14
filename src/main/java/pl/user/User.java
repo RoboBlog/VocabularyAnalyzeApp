@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 
+
+//TODO Refactor this?
 @Entity
 @Table(name = "user")
 public class User {
@@ -35,6 +37,7 @@ public class User {
 
     @Email
     @NotNull
+    @Column(name = "email", unique = true)
     @JsonView(Views.Public.class)
     private String email;
 
@@ -53,6 +56,9 @@ public class User {
 
     @JsonView(Views.Public.class)
     private long amountKnownWords;
+
+    @JsonView(Views.Internal.class)
+    private long scoreV2;
 
     @JsonView(Views.Public.class)
     private long score;
@@ -91,6 +97,7 @@ public class User {
         this.amountKnownWords = 0;
         this.activationCode = UUID.randomUUID().toString();
         this.score = 0;
+        this.scoreV2 = 0;
         this.dayScore = 0;
         this.createDate = LocalDateTime.now();
     }
@@ -142,6 +149,7 @@ public class User {
         this.amountKnownWords = 0;
         this.activationCode = UUID.randomUUID().toString();
         this.score = 0;
+        this.scoreV2 = 0;
         this.dayScore = 0;
         this.createDate = LocalDateTime.now();
     }
@@ -154,9 +162,18 @@ public class User {
         this.amountWords=0;
         this.amountKnownWords=0;
         this.score = 0;
+        this.scoreV2 = 0;
         this.dayScore = 0;
         this.createDate = LocalDateTime.now();
 
+    }
+
+    public long getScoreV2() {
+        return scoreV2;
+    }
+
+    public void setScoreV2(long scoreV2) {
+        this.scoreV2 = scoreV2;
     }
 
     public void setUserId(Long userId) {

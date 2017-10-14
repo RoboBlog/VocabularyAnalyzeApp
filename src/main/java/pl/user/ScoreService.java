@@ -19,15 +19,17 @@ public class ScoreService {
         User user = userService.getUser();
         user.setDayScore(user.getDayScore() + 1);
         user.setScore(user.getScore() + 1);
+        user.setScoreV2(user.getScoreV2() + 1); //for futher data analysis
         userRepository.save(user);
 
     }
 
-    //hmmm, it is good place?
-    @Scheduled(cron = "0 0 12 * * ?")
-    public void resetAllDayScore() {
-        userRepository.resetAllDayScore();
+    public void subtractOneScoreV2(){
+        User user = userService.getUser();
+        user.setScoreV2(user.getScoreV2() - 1);
+        userRepository.save(user);
     }
+
 
 
     //TODO IMPLEMENTATION THIS with pagination

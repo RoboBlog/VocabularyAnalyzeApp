@@ -104,7 +104,7 @@ public class QuizService {
             } else {
                 exercise.setCorrect(false);
                 userWord.setCorrectness(userWord.getCorrectness() - 1);
-
+                scoreService.subtractOneScoreV2();
                 response = "is Incorrect";
             }
         } else if (Objects.equals(type, "ep")) {
@@ -115,7 +115,7 @@ public class QuizService {
             } else {
                 exercise.setCorrect(false);
                 userWord.setCorrectness(userWord.getCorrectness() - 1);
-
+                scoreService.subtractOneScoreV2();
                 response = "is Incorrect";
             }
         }

@@ -40,7 +40,6 @@ public class UserDictionariesService {
     public void addDictionary(String name){
         User user = userService.getUser();
         UserDictionary dictionary = new UserDictionary(name);
-        System.out.println(user+""+" "+ dictionary);
         user.addDictionaries(dictionary);
         userDictionaryRepository.save(dictionary);
         userRepository.save(user);
