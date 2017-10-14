@@ -54,6 +54,7 @@ public class DictionaryService {
         UserWord word = userWordRepository.findById(wordId);
         dictionary.removeWord(word);
         userDictionariesService.save(dictionary);
+        learnService.decrementationAmountWords();
     }
 
 }
