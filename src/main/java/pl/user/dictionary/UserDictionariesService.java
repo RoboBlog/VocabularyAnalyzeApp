@@ -36,7 +36,6 @@ public class UserDictionariesService {
         return dictionaries;
     }
 
-    //TODO REPAIR IT !
     public void addDictionary(String name){
         User user = userService.getUser();
         UserDictionary dictionary = new UserDictionary(name);

@@ -41,18 +41,6 @@ public class QuizController {
         String response = quizService.checkAnswer(exerciseId, answer, type);
         return response;
     }
-//
 
-//    @GetMapping("/{dictionaryId}/")
-//    public int quiz() {
-//        Quiz quiz = new Quiz();
-//        Random r = new Random();
-//        int max = 10;
-//        int min = 2;
-//        int wordNumber = r.nextInt((max - min)+1) + min;
-//        int wordNumber = r.nextInt(max + 1);
-//        return wordNumber;
-//        Exercise exercise = new Exercise()
-//        return "quiz";
-//    }
+
 }

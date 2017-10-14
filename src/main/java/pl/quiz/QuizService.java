@@ -134,6 +134,7 @@ public class QuizService {
 
         return exercises.stream()
                 .filter(exercise1 -> !exercise1.isCorrect())
+                .filter(exercise1 -> !exercise1.getUserWord().isKnow())
                 .count();
     }
 

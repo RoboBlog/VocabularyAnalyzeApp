@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.other.Views;
-//import pl.security.CustomUserDetailsService;
 
+import javax.validation.Valid;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping("/api/user")
@@ -14,7 +14,6 @@ public class UserController {
 
     private final UserService userService;
 
-    //    private final CustomUserDetailsService customUserDetailsService;
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -27,6 +26,11 @@ public class UserController {
         return user;
     }
 
+    @PutMapping("/edit/user")
+    public void editUser(@RequestBody User user){
+        userService.editUser(user);
+    }
+
     @PutMapping("/edit/username")
     public void editUsername(@RequestParam String username){
         userService.editUsername(username);
@@ -37,12 +41,5 @@ public class UserController {
         userService.editMail(mail);
     }
 
-//    @GetMapping("/get/role")
-//    public void getRole(){
-//        String username = userService.getUsername();
-//        UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
-//        System.out.println(userDetails.getAuthorities());
-//
-//    }
 
 }

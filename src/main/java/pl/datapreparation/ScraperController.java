@@ -13,10 +13,6 @@ import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by maciek on 8/16/17.
- */
-
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @Validated
