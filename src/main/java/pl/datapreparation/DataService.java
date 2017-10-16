@@ -25,13 +25,11 @@ import java.io.*;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by maciek on 8/17/17.
- */
 @Service
 public class DataService {
 
-    final String fileLocation = "/home/maciek/Desktop/vocabularyanalyzeapp/upload-dir/";
+    //TODO how to mock this and write test?
+    String fileLocation = "upload-dir/";
 
 
     //factory
@@ -79,7 +77,8 @@ public class DataService {
         int paragraphCount=file.getTextDocument().getParagraphCount();
 
         for(int i = 0; i<paragraphCount; i++){
-            text.append(" ").append(file.getTextDocument().getParagraph(i).toString());
+            text.append(" ").append(file.getTextDocument().getParagraph(i).getCharacterContent());
+
         }
         return text.toString();
     }

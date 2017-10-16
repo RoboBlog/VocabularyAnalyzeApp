@@ -1,6 +1,7 @@
 package pl.quiz;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pl.translator.Word;
 import pl.user.ScoreService;
@@ -46,45 +47,52 @@ public class QuizService {
     }
 
 
-    //TODO SECURITY
+
     public Quiz createNewQuiz(long dictionaryId){
-//        User user = userService.getUser();
+        User user = userService.getUser();
 
         UserDictionary dictionary = userDictionariesService.getDictionary(dictionaryId);
         Set<UserWord> words = dictionary.getWords();
 
         Quiz quiz = new Quiz();
+        quiz.setUser(user);
 
         words.forEach(word -> {
             Exercise exercise = new Exercise(word);
             quiz.addExercise(exercise);
         });
 
-        quizRepository.save(quiz); //it is necessary?
-//        userRepository.save(user);
+        quizRepository.save(quiz);
         return quiz;
     }
 
 
-    //TODO SECURITY
     public Exercise getExercise(long quizId) {
+        User user = userService.getUser();
         Quiz quiz = getQuiz(quizId);
-        List<Exercise> exercises = quiz.getExercises();
-        long sizeAfterFilter = getSizeAfterFilter(exercises);
 
-        if (sizeAfterFilter > 0) {
-            Optional<Exercise> exercise = exercises
-                    .stream()
-                    .filter(exercise1 -> !exercise1.isCorrect())
-                    .skip(ThreadLocalRandom.current().nextLong(sizeAfterFilter))
-                    .findFirst();
+        if(user == quiz.getUser()) {
+            List<Exercise> exercises = quiz.getExercises();
+            long sizeAfterFilter = getSizeAfterFilter(exercises);
 
-            return exercise.get();
-        } else {
-            quiz.setDone(true);
-        // TODO quizRepository.save(quiz); //it is necessary?
-            System.out.println("Quiz is done");
-            return new Exercise();
+            if (sizeAfterFilter > 0) {
+                Optional<Exercise> exercise = exercises
+                        .stream()
+                        .filter(exercise1 -> !exercise1.isCorrect())
+                        .skip(ThreadLocalRandom.current().nextLong(sizeAfterFilter))
+                        .findFirst();
+
+                return exercise.get();
+            } else {
+                quiz.setDone(true);
+                quizRepository.save(quiz);
+                //TODO log quiz is done
+                return new Exercise();
+//                throw new QuizIsDone()//add exception
+            }
+        }
+        else{
+            throw new AccessDeniedException("Access Denied!");
         }
     }
 
@@ -123,10 +131,17 @@ public class QuizService {
     }
 
 
-    //    TODO SECURITY && OPTIONAL
+    //    TODO OPTIONAL
     public Quiz getQuiz(long quizId) {
+        User user = userService.getUser();
+
         Optional<Quiz> quiz = quizRepository.findById(quizId);
-        return quiz.get();
+        if(user == quiz.get().getUser()) {
+            return quiz.get();
+        }
+        else{
+            throw new AccessDeniedException("Access Denied!");
+        }
     }
 
 

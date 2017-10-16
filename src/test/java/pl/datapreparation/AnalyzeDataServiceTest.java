@@ -31,9 +31,20 @@ public class AnalyzeDataServiceTest {
     }
 
     @Test
-    public void dataPreparationTest(){
+    public void dataPreparation_CorrectData_WordsList(){
        List<ResultWord> test = analyzeDataService.dataPreparation("home arm mother mother mother");
+
         assertThat(test.get(0).getAmount()).isEqualTo(3);
         assertThat(test.get(0).getWord().getPolishWord()).isEqualTo("testpl");
+    }
+
+
+    //TODO fix this test
+    @Test
+    public void dataPreparation_UknownWords_EmptyList(){
+        List<ResultWord> test = analyzeDataService.dataPreparation("test test2");
+
+//        assertThat(test==null);
+
     }
 }

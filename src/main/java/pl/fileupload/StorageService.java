@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
+//TODO DELETE THIS
 public interface StorageService {
 
     void init();

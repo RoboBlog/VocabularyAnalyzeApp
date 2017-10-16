@@ -35,6 +35,8 @@ public class AnalyzeDataService {
         Map<Word, Integer> result = new HashMap<>();
 
         List<Word> allByEnglishWord = wordRepository.findByEnglishWordIn(words);
+//        Optional<List<Word>> allByEnglishWord = wordRepository.findByEnglishWordIn(words);
+
         allByEnglishWord.forEach(word ->{
            String englishWord = word.getEnglishWord();
            Integer integer = map.get(englishWord.toLowerCase());

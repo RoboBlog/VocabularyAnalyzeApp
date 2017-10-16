@@ -17,7 +17,7 @@ import pl.security.service.JwtAuthenticationResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
-//@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 public class AuthenticationRestController {
 

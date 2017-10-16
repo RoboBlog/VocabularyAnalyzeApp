@@ -1,5 +1,6 @@
 package pl.quiz;
 
+import pl.user.User;
 import pl.user.dictionary.UserDictionary;
 
 import javax.persistence.*;
@@ -17,9 +18,22 @@ public class Quiz {
     private List<Exercise> exercises = new ArrayList<>();
     private boolean done;
 
-    public Quiz(List<Exercise> exercises) {
+    //TODO cascade
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
+
+    public Quiz(List<Exercise> exercises, User user) {
         this.exercises = exercises;
         this.done = false;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Quiz() {

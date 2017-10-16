@@ -83,6 +83,7 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
     private List<Authority> authorities = new LinkedList<>();
 
+
 //    public static long getSerialVersionUID() {
 //        return serialVersionUID;
 //    }

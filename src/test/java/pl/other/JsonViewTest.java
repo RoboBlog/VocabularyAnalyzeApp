@@ -14,7 +14,7 @@ public class JsonViewTest {
 
     @Test
     public void whenUsePublicView() throws JsonProcessingException {
-        User user = new User("maciek", "password", "test@gmail.com");//TODO remove redundancy
+        User user = new User("maciek", "password", "test@gmail.com"); //TODO remove redundancy
 
         ObjectMapper mapper = new ObjectMapper();
         String result = mapper
