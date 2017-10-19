@@ -1,5 +1,9 @@
 package pl.security.controller;
 
+//import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class AuthenticationRestController {
 
+    private static Logger logger = LoggerFactory.getLogger(AuthenticationRestController.class);
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
     private final UserDetailsService userDetailsService;
@@ -35,6 +40,7 @@ public class AuthenticationRestController {
 
     @PostMapping(value = "${jwt.route.authentication.path}")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
+        logger.debug("User {} crete authToken", authenticationRequest.getUsername());
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authenticationRequest.getUsername(),

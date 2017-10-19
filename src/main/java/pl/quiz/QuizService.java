@@ -8,10 +8,10 @@ import pl.user.ScoreService;
 import pl.user.User;
 import pl.user.UserRepository;
 import pl.user.UserService;
-import pl.user.dictionary.UserDictionariesService;
-import pl.user.dictionary.UserDictionary;
-import pl.user.dictionary.UserDictionaryRepository;
-import pl.user.dictionary.UserWord;
+import pl.dictionary.UserDictionariesService;
+import pl.dictionary.UserDictionary;
+import pl.dictionary.UserDictionaryRepository;
+import pl.dictionary.UserWord;
 
 import java.util.List;
 import java.util.Objects;

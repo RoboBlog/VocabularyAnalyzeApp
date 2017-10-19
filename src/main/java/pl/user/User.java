@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Email;
 import pl.other.Views;
 import pl.quiz.Quiz;
 import pl.security.Authority;
-import pl.user.dictionary.UserDictionary;
+import pl.dictionary.UserDictionary;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

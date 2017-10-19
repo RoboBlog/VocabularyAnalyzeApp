@@ -25,6 +25,7 @@ public class JsonViewTest {
         assertThat(result, containsString("test@gmail.com"));
     }
 
+    @Test
     public void whenUseInternalView() throws JsonProcessingException{
         User user = new User("maciek", "password", "test@gmail.com");
 

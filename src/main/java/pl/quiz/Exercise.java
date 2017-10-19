@@ -1,6 +1,6 @@
 package pl.quiz;
 
-import pl.user.dictionary.UserWord;
+import pl.dictionary.UserWord;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
