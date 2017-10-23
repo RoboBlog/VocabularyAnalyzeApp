@@ -1,12 +1,15 @@
 language: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
 services:
-  - mysql
+- mysql
+notifications:
+  slack:
+    secure: fyOmXXmJ6eQgC8RwxXf/Q9Js2NKcYQ8iQnVYME/xonQeihlbRe1wZftJHWSnc83Txf9fi2W93o4tIg7W2kEjxNB2KIVTuu/Bp2qXvVIAY8LXOH+VVHGQNspuYIIiCo3oJ9Na5pB7NjW33/eu5W/y2Juhuj9qdG3Qhl9yAx666Rn7RfNRtJsBULGipzqiUrQVISCE+I6wRo+tTrDXe1ViNfjnTap5w8oDZsWoylS95xE3DTULXrzsM1LN9CzLW/CGV6iSx4+9hFWCPubDMDf9ldewMlgrDaCkfDMMppfds58N6VsZzu/uWZ6nF/FniAp7TGA5pWUTtdjl3nyGfPq0vRANF5R6CUqAJHiJUpkGa7LCAKDb4WPmDxRA7YG33/Xjxvzk7BccvR76oGAgBRvzMe8BfPDkfpq26u8TDGWIvCv+QdleAUOcHKtVZbropk4p9gBZ+Wj08pqgaejDK54K/cE04s3axKodqZRSPCgnQjTK0nMb8O6cCqsrf0C5zukmbUuFX/t0y3mRdbFF2asOiTAtqNE0gVQB/Gx1JLEZEgSg54F08xIASBCf6orvwV9gnMLFzYKwV3cBMfF4oWy6gTSzAx9aPCR2XERjIlPPROBVSUl6kjdCxH2ps7bcLZHO4LkTjUffhjR88vs3chLwgTiIxbvs9LrskxWZNUOa0bQ=
 before_script:
-  - chmod +x gradlew
+- chmod +x gradlew
 script:
-  - ./gradlew check
-  - ./gradlew jacocoTestReport
+- "./gradlew check"
+- "./gradlew jacocoTestReport"
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash)
