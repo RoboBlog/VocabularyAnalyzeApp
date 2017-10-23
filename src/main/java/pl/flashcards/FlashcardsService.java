@@ -1,14 +1,15 @@
 package pl.flashcards;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pl.translator.Word;
+import pl.user.User;
 import pl.user.UserService;
-import pl.user.dictionary.UserDictionariesService;
-import pl.user.dictionary.UserDictionary;
-import pl.user.dictionary.UserWord;
+import pl.dictionary.UserDictionariesService;
+import pl.dictionary.UserDictionary;
+import pl.dictionary.UserWord;
 
-import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -25,14 +26,20 @@ public class FlashcardsService {
 
     //TODO SECURITY.
     public Word getFlashcard(long dictionaryId){
+        User user = userService.getUser();
         UserDictionary dictionary = dictionariesService.getDictionary(dictionaryId);
-        Set<UserWord> words = dictionary.getWords();
-        UserWord randomUserWord = getRandomUserWord(words);
 
-        return randomUserWord.getWord();
+        if(user==dictionary.getUser()) {
+            Set<UserWord> words = dictionary.getWords();
+            UserWord randomUserWord = getRandomUserWord(words);
+            return randomUserWord.getWord();
+        }
+        else{
+            throw new AccessDeniedException("Access Denied!");
+        }
     }
 
-    private UserWord getRandomUserWord(Set<UserWord> words){
+    public UserWord getRandomUserWord(Set<UserWord> words){
         int rand = ThreadLocalRandom.current().nextInt(words.size());
         int i = 0;
         UserWord randomWord = null;

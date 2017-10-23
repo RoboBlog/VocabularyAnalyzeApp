@@ -4,25 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.quiz.ExerciseRepository;
-import pl.translator.Word;
 import pl.translator.WordRepository;
 import pl.user.*;
-import pl.user.dictionary.UserDictionary;
-import pl.user.dictionary.UserDictionaryRepository;
-import pl.user.dictionary.UserWord;
-import pl.user.dictionary.UserWordRepository;
+import pl.dictionary.UserDictionaryRepository;
+import pl.dictionary.UserWordRepository;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
 
-/**
- * Created by maciek on 8/17/17.
- */
 @Component
 public class RunAtStart {
 //    private final PasswordEncoder passwordEncoder;
@@ -166,7 +155,7 @@ public class RunAtStart {
 //        }
 //        while (true) {
 //            try {
-//                File file = new File("/home/maciek/Desktop/DATA/WordsDataset/Audio/full.txt");
+//                File file = new File("/home/maciek/Desktop/DATA/WordsDataset/Audio/47.txt");
 //                Scanner scanner = new Scanner(file, "UTF-8");
 //                String text = scanner.useDelimiter("\\A").next();
 //                scanner.close();

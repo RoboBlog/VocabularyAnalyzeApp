@@ -5,11 +5,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
 public interface WordRepository extends JpaRepository<Word, Long> {
     Word findByEnglishWord(String englishWord);
     List<Word> findByEnglishWordIn(List<String> words);
+//   Optional<List<Word>> findByEnglishWordIn(List<String> words);
     Word findById(long id);
 }

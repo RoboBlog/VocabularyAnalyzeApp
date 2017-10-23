@@ -6,3 +6,6 @@ jwt:
     authentication:
       path: auth
       refresh: refresh
+
+scheduler:
+  reset-day-score: 0 0 12 * * ?

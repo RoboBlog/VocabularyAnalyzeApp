@@ -6,17 +6,10 @@ import pl.quiz.Exercise;
 import pl.quiz.ExerciseRepository;
 import pl.quiz.Quiz;
 import pl.quiz.QuizService;
-import pl.translator.Word;
 import pl.translator.WordRepository;
 import pl.user.ScoreService;
-import pl.user.dictionary.UserDictionary;
-import pl.user.dictionary.UserDictionaryRepository;
-import pl.user.dictionary.UserWord;
-import pl.user.dictionary.UserWordRepository;
-
-import java.util.HashSet;
-import java.util.Set;
-
+import pl.dictionary.UserDictionaryRepository;
+import pl.dictionary.UserWordRepository;
 
 
 @CrossOrigin(origins = "http://localhost:8081")

@@ -1,4 +1,4 @@
-package pl.user.dictionary;
+package pl.dictionary;
 
 import org.springframework.stereotype.Service;
 import pl.user.User;

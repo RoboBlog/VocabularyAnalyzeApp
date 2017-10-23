@@ -1,4 +1,4 @@
-package pl.user.dictionary;
+package pl.dictionary;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,9 +10,6 @@ import pl.user.UserService;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by maciek on 8/25/17.
- */
 @Service
 public class UserDictionariesService {
     private final UserService userService;
@@ -47,6 +44,7 @@ public class UserDictionariesService {
 
     public void removeDictionary(long dictionaryId){
         //TODO SECURITY
+
         UserDictionary dictionary = userDictionaryRepository.getById(dictionaryId);
         Set<UserWord> words = dictionary.getWords();
         int size = words.size();
@@ -56,10 +54,10 @@ public class UserDictionariesService {
     }
 
     public UserDictionary getDictionary(long dictionaryId){
-        //TODO SECURITY
         UserDictionary dictionary = userDictionaryRepository.getById(dictionaryId);
         return dictionary;
     }
+
     public void save(UserDictionary userDictionary){
         userDictionaryRepository.save(userDictionary);
     }

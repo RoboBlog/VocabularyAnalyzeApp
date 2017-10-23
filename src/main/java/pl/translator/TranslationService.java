@@ -3,9 +3,6 @@ package pl.translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-/**
- * Created by maciek on 8/20/17.
- */
 @Repository
 public class TranslationService {
     private final WordRepository wordRepository;

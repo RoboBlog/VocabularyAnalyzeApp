@@ -1,4 +1,4 @@
-package pl.user.dictionary;
+package pl.dictionary;
 
 import pl.translator.Word;
 

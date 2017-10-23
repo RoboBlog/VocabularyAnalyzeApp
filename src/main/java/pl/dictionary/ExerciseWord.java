@@ -1,4 +1,4 @@
-package pl.user.dictionary;
+package pl.dictionary;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

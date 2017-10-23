@@ -1,5 +1,6 @@
 package pl.information;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class InformationService {
         this.informationRepository = informationRepository;
     }
 
-    //admin
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<Information> getAllInformations() {
         List<Information> allInformations = informationRepository.findAll();
         return allInformations;
@@ -23,25 +24,27 @@ public class InformationService {
         return allActiveInformations;
     }
 
-    //admin
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void addInformation(Information information, String name) {
         information.setActive(true);
         information.setAuthor(name);
         informationRepository.save(information);
     }
 
-    //admin
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void updateInformation(Information information, long informationId) {
         Information byId = informationRepository.getById(informationId);
         information.setId(byId.getId());
         informationRepository.save(information);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void deactivateInformation(Information information) {
         information.setActive(false);
         informationRepository.save(information);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void activeInformation(Information information) {
         information.setActive(true);
     }
