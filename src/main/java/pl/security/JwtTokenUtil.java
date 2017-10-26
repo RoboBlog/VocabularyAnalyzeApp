@@ -3,6 +3,7 @@ package pl.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,9 @@ public class JwtTokenUtil {
 
     static final String AUDIENCE_UNKNOWN = "unknown";
     static final String AUDIENCE_WEB = "web";
+
+    @Autowired
+    private TimeProvider timeProvider;
 
     @Value("${jwt.secret}")
     private String secret;
@@ -54,7 +58,7 @@ public class JwtTokenUtil {
 
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
-        return expiration.before(new Date());
+        return expiration.before(timeProvider.now());
     }
 
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
@@ -74,7 +78,7 @@ public class JwtTokenUtil {
     }
 
     private String doGenerateToken(Map<String, Object> claims, String subject, String audience) {
-        final Date createdDate = new Date();
+        final Date createdDate = timeProvider.now();
         final Date expirationDate = calculateExpirationDate(createdDate);
 
         System.out.println("doGenerateToken " + createdDate);
@@ -96,7 +100,7 @@ public class JwtTokenUtil {
     }
 
     public String refreshToken(String token) {
-        final Date createdDate = new Date();
+        final Date createdDate = timeProvider.now();
         final Date expirationDate = calculateExpirationDate(createdDate);
 
         final Claims claims = getAllClaimsFromToken(token);

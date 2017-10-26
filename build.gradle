@@ -35,7 +35,7 @@ dependencies  {
 	compile ('org.springframework.boot:spring-boot-starter-mail')
 	compile group: 'org.jsoup', name: 'jsoup', version: '1.10.2'
 	compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.10'
-	compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
+//	compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
 	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
 
 //d
@@ -49,6 +49,7 @@ dependencies  {
 
 	runtime('mysql:mysql-connector-java')
 
+	testCompile "com.github.tomakehurst:wiremock:2.10.1"
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
