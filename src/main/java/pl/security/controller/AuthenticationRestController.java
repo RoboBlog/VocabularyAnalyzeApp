@@ -1,7 +1,5 @@
 package pl.security.controller;
 
-//import org.apache.log4j.Logger;
-//import org.apache.log4j.Logger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class AuthenticationRestController {
 
-    private static Logger logger = LoggerFactory.getLogger(AuthenticationRestController.class);
+    private final Logger logger = LoggerFactory.getLogger(AuthenticationRestController.class);
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
     private final UserDetailsService userDetailsService;

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ResetDayScores {
-    private static Logger logger = LoggerFactory.getLogger(ResetDayScores.class);
+    private final Logger logger = LoggerFactory.getLogger(ResetDayScores.class);
 
     private final UserRepository userRepository;
 
