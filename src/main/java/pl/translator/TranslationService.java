@@ -12,11 +12,12 @@ public class TranslationService {
         this.wordRepository = wordRepository;
     }
 
+//TODO return throws
     public String translateEnglishToPolish(String word){
         Word wordpolish = wordRepository.findByEnglishWord(word);
         if(wordpolish!= null)
         return wordpolish.getPolishWord();
         else
-        return "non translation"+word;
+        return "non translation "+word;
     }
 }

@@ -8,7 +8,7 @@ public class JwtAuthenticationResponse {
         this.token = token;
     }
 
-    public String getToken() {
-        return this.token;
-    }
+//    public String getToken() {
+//        return this.token;
+//    }
 }

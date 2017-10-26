@@ -19,7 +19,7 @@ public class VocabularyanalyzeappApplication {
 
 	}
 
-	@Bean
+//	@Bean
 	CommandLineRunner init(StorageService storageService) {
 		return (args) -> {
 			storageService.deleteAll();

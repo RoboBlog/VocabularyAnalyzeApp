@@ -49,6 +49,7 @@ dependencies  {
 
 	runtime('mysql:mysql-connector-java')
 
+	testCompile group: 'com.h2database', name: 'h2', version: '1.4.196'
 	testCompile "com.github.tomakehurst:wiremock:2.10.1"
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

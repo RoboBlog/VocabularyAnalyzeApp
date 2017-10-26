@@ -5,14 +5,14 @@ public class JwtAuthenticationRequest {
     private String username;
     private String password;
 
-    public JwtAuthenticationRequest() {
-        super();
-    }
+//    public JwtAuthenticationRequest() {
+//        super();
+//    }
 
-    public JwtAuthenticationRequest(String username, String password) {
-        this.setUsername(username);
-        this.setPassword(password);
-    }
+//    public JwtAuthenticationRequest(String username, String password) {
+//        this.setUsername(username);
+//        this.setPassword(password);
+//    }
 
     public String getUsername() {
         return this.username;

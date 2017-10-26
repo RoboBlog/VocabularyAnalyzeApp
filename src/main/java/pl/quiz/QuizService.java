@@ -23,18 +23,14 @@ import java.util.concurrent.ThreadLocalRandom;
 public class QuizService {
     private final UserDictionariesService userDictionariesService;
     private final UserService userService;
-    private final UserRepository userRepository;
-    private final UserDictionaryRepository userDictionaryRepository;
     private final QuizRepository quizRepository;
     private final ExerciseRepository exerciseRepository;
     private final ScoreService scoreService;
 
     @Autowired
-    public QuizService(UserDictionariesService userDictionariesService, UserService userService, UserRepository userRepository, UserDictionaryRepository userDictionaryRepository, QuizRepository quizRepository, ExerciseRepository exerciseRepository, ScoreService scoreService) {
+    public QuizService(UserDictionariesService userDictionariesService, UserService userService, QuizRepository quizRepository, ExerciseRepository exerciseRepository, ScoreService scoreService) {
         this.userDictionariesService = userDictionariesService;
         this.userService = userService;
-        this.userRepository = userRepository;
-        this.userDictionaryRepository = userDictionaryRepository;
         this.quizRepository = quizRepository;
         this.exerciseRepository = exerciseRepository;
         this.scoreService = scoreService;

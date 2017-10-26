@@ -103,6 +103,7 @@ public class User {
         this.createDate = LocalDateTime.now();
     }
 
+
     public List<Authority> getAuthorities() {
         return authorities;
     }
@@ -154,6 +155,8 @@ public class User {
         this.dayScore = 0;
         this.createDate = LocalDateTime.now();
     }
+
+
 
     public User(String username, String password, String email) {
         this.username = username;
@@ -267,5 +270,27 @@ public class User {
 
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", enabled=" + enabled +
+                ", activationCode='" + activationCode + '\'' +
+                ", dictionaries=" + dictionaries +
+                ", amountWords=" + amountWords +
+                ", amountKnownWords=" + amountKnownWords +
+                ", scoreV2=" + scoreV2 +
+                ", score=" + score +
+                ", dayScore=" + dayScore +
+                ", createDate=" + createDate +
+                ", quizes=" + quizes +
+                ", lastPasswordResetDate=" + lastPasswordResetDate +
+                ", authorities=" + authorities +
+                '}';
     }
 }
