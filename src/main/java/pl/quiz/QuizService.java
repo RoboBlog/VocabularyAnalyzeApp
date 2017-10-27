@@ -3,15 +3,13 @@ package pl.quiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import pl.dictionary.UserDictionariesService;
+import pl.dictionary.UserDictionary;
+import pl.dictionary.UserWord;
 import pl.translator.Word;
 import pl.user.ScoreService;
 import pl.user.User;
-import pl.user.UserRepository;
 import pl.user.UserService;
-import pl.dictionary.UserDictionariesService;
-import pl.dictionary.UserDictionary;
-import pl.dictionary.UserDictionaryRepository;
-import pl.dictionary.UserWord;
 
 import java.util.List;
 import java.util.Objects;

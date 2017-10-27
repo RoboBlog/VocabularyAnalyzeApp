@@ -2,13 +2,11 @@ package pl.datapreparation;
 
 import org.junit.Before;
 import org.junit.Test;
-import pl.datapreparation.DataService;
 import pl.fileupload.FileSystemStorageService;
 import pl.fileupload.StorageProperties;
 
 import javax.swing.text.BadLocationException;
 import java.io.IOException;
-import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

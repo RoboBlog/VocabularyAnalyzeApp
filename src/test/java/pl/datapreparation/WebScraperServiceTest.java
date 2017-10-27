@@ -7,13 +7,11 @@ import org.jsoup.nodes.Document;
 import org.junit.Rule;
 import org.junit.Test;
 
-import javax.xml.parsers.DocumentBuilder;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
-import static org.assertj.core.api.Java6Assertions.assertThat;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class WebScraperServiceTest {
 

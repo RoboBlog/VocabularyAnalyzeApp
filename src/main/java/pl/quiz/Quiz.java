@@ -1,7 +1,7 @@
 package pl.quiz;
 
-import pl.user.User;
 import pl.dictionary.UserDictionary;
+import pl.user.User;
 
 import javax.persistence.*;
 import java.util.ArrayList;

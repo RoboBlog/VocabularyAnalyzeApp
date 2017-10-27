@@ -1,7 +1,9 @@
 package pl.security.controller;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pl.security.JwtTokenUtil;
 import pl.security.JwtUser;
 

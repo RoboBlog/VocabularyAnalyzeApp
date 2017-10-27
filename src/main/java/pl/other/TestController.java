@@ -2,14 +2,14 @@ package pl.other;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import pl.dictionary.UserDictionaryRepository;
+import pl.dictionary.UserWordRepository;
 import pl.quiz.Exercise;
 import pl.quiz.ExerciseRepository;
 import pl.quiz.Quiz;
 import pl.quiz.QuizService;
 import pl.translator.WordRepository;
 import pl.user.ScoreService;
-import pl.dictionary.UserDictionaryRepository;
-import pl.dictionary.UserWordRepository;
 
 
 @CrossOrigin(origins = "http://localhost:8081")

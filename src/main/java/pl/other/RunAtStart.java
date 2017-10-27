@@ -1,16 +1,18 @@
 package pl.other;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import pl.quiz.ExerciseRepository;
-import pl.translator.WordRepository;
-import pl.user.*;
 import pl.dictionary.UserDictionaryRepository;
 import pl.dictionary.UserWordRepository;
+import pl.quiz.ExerciseRepository;
+import pl.translator.WordRepository;
+import pl.user.AccountActivationService;
+import pl.user.UserRepository;
 
 import javax.annotation.PostConstruct;
 import java.io.FileNotFoundException;
+
+//import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Component
 public class RunAtStart {

@@ -3,10 +3,10 @@ package pl.user;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.Email;
+import pl.dictionary.UserDictionary;
 import pl.other.Views;
 import pl.quiz.Quiz;
 import pl.security.Authority;
-import pl.dictionary.UserDictionary;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

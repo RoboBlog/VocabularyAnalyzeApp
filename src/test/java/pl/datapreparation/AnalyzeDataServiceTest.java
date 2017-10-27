@@ -2,14 +2,13 @@ package pl.datapreparation;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import pl.translator.Word;
 import pl.translator.WordRepository;
-import static org.assertj.core.api.Assertions.*;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

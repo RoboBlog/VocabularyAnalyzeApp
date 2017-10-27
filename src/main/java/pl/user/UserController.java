@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.other.Views;
 
-import javax.validation.Valid;
-
 @CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping("/api/user")
 @RestController

@@ -3,12 +3,12 @@ package pl.flashcards;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
-import pl.translator.Word;
-import pl.user.User;
-import pl.user.UserService;
 import pl.dictionary.UserDictionariesService;
 import pl.dictionary.UserDictionary;
 import pl.dictionary.UserWord;
+import pl.translator.Word;
+import pl.user.User;
+import pl.user.UserService;
 
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
