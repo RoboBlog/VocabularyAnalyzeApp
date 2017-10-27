@@ -53,23 +53,19 @@ dependencies  {
 	testCompile "com.github.tomakehurst:wiremock:2.10.1"
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
-jacocoTestCoverageVerification {
-	violationRules {
-//		rule {
-//			limit {
-//				minimum = 0.5
-//			}
-//		}
 
-		rule {
-			enabled = false
-			element = 'CLASS'
-			includes = ['pl.*']
-		}
-	}
-}
 
 jacocoTestReport {
+	jacocoTestCoverageVerification {
+
+		violationRules {
+			rule {
+				enabled = false
+				element = 'CLASS'
+				includes = ['pl.*']
+			}
+		}
+	}
 	reports {
 		xml.enabled = true
 		html.enabled = true
