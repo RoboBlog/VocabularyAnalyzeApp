@@ -24,7 +24,7 @@ public class FlashcardsService {
         this.dictionariesService = dictionariesService;
     }
 
-    //TODO SECURITY.
+    //TODO LOGGER
     public Word getFlashcard(long dictionaryId){
         User user = userService.getUser();
         UserDictionary dictionary = dictionariesService.getDictionary(dictionaryId);

@@ -29,6 +29,7 @@ public class DictionaryService {
         this.learnService = learnService;
     }
 
+    //TODO ROLE ADMIN
     public Set<UserWord> getAll(long dictionaryId) {
         UserDictionary dictionary = userDictionariesService.getDictionary(dictionaryId);
         Set<UserWord> words = dictionary.getWords();

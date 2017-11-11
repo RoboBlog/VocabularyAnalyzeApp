@@ -125,17 +125,44 @@ public class QuizService {
     }
 
 
-    //    TODO OPTIONAL
-    public Quiz getQuiz(long quizId) {
+    //    TODO OPTIONAL, TEST IT !!!
+    public Quiz getQuiz(long quizId) throws IllegalArgumentException {
         User user = userService.getUser();
 
         Optional<Quiz> quiz = quizRepository.findById(quizId);
-        if(user == quiz.get().getUser()) {
-            return quiz.get();
-        }
-        else{
-            throw new AccessDeniedException("Access Denied!");
-        }
+
+        return quiz.map(q->{
+           if(q.getUser()!=user)
+               throw new AccessDeniedException("Access denied!");
+           else
+               return q;
+        }).orElseThrow(() -> {
+            throw new NotFoundException("Not found quiz!");
+        });
+
+//        return quiz.flatMap(quiz1 -> ? quiz1 -> quiz)
+//                    .flatMap()(q->{
+//            return q
+//        })
+//        quiz.ifPresent(q ->{
+//            if(q.getUser()==user){
+//                return q;
+//            }
+//            else{
+//                throw new AccessDeniedException("Access Denied!");
+//            }
+//        });
+//        quiz.orElseThrow(throw new IllegalAccessError("Quiz not found"))//notFoundExc TODO
+
+//        return quiz.flatMap(Quiz::getUser)
+//                .orElseThrow(new AccessDeniedException("Access Denied!"));
+
+//        if(user == quiz.get().getUser()) {
+//            return quiz.get();
+//        }
+//        else{
+//            throw new AccessDeniedException("Access Denied!");
+//        }
     }
 
 
