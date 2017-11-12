@@ -75,9 +75,7 @@ public class QuizService {
                     .filter(exercise1 -> !exercise1.isCorrect())
                     .skip(ThreadLocalRandom.current().nextLong(sizeAfterFilter))
                     .findFirst()
-                    .orElseThrow(() -> {
-                        throw new NoSuchElementException("No such Exercise!");
-                     });
+                    .orElseThrow(() -> new NoSuchElementException("No such Exercise!"));
 
             return exercise;
         } else {
@@ -129,9 +127,7 @@ public class QuizService {
         User user = userService.getUser();
 
         Quiz quiz = quizRepository.findById(quizId)
-                .orElseThrow(() ->{
-                    throw new NoSuchElementException("Not found quiz!");
-                });
+                .orElseThrow(() -> new NoSuchElementException("Not found quiz!"));
 
         if (!(quiz.getUser().equals(user))) {
             throw new AccessDeniedException("Access denied!");
