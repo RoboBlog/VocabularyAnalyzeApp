@@ -11,6 +11,7 @@ import pl.user.UserService;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -43,6 +44,19 @@ public class QuizServiceTest {
         List<Quiz> allQuizes = quizService.getAllQuizes();
 
         assertThat(allQuizes.get(0)).isEqualTo(quiz);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void getQuiz_NoQuiz_NoSuchElementException(){
+        UserDictionariesService userDictionariesService = mock(UserDictionariesService.class);
+        UserService userService = mock(UserService.class);
+        QuizRepository quizRepository = mock(QuizRepository.class);
+        ExerciseRepository exerciseRepository = mock(ExerciseRepository.class);
+        ScoreService scoreService = mock(ScoreService.class);
+
+        QuizService quizService = new QuizService(userDictionariesService, userService,quizRepository, exerciseRepository, scoreService);
+        quizService.getQuiz(123L);
+
     }
 
     @Test

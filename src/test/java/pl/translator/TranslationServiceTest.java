@@ -2,6 +2,8 @@ package pl.translator;
 
 import org.junit.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -19,13 +21,11 @@ public class TranslationServiceTest {
         assertThat(word).isEqualTo("matka");
     }
 
-    @Test
-    public void translateEnglishToPolish_UnknownEnglishWord_NonTranslationMessage(){
+    @Test(expected = NoSuchElementException.class)
+    public void translateEnglishToPolish_UnknownEnglishWord_NoSuchElementException(){
         WordRepository wordRepository = mock(WordRepository.class);
 
         TranslationService translationService = new TranslationService(wordRepository);
         String word = translationService.translateEnglishToPolish("mother");
-
-        assertThat(word).isEqualTo("non translation mother");
     }
 }

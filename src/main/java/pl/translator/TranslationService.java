@@ -17,9 +17,11 @@ public class TranslationService {
 //TODO logger
     public String translateEnglishToPolish(String word){
         Word wordpolish = wordRepository.findByEnglishWord(word);
-        if(wordpolish!= null)
-        return wordpolish.getPolishWord();
-        else
-        throw new NoSuchElementException("Non translation: " + word);
+        if(wordpolish!= null) {
+            return wordpolish.getPolishWord();
+        }
+        else {
+            throw new NoSuchElementException("Non translation: " + word);
+        }
     }
 }

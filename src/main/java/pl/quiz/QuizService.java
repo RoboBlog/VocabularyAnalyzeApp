@@ -118,11 +118,11 @@ public class QuizService {
                 response = "is Incorrect";
             }
         }
+
         return response;
     }
 
 
-    // TODO TEST IT !!!
     public Quiz getQuiz(long quizId) {
         User user = userService.getUser();
 
