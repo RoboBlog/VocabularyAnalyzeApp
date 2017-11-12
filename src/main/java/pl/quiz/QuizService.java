@@ -11,10 +11,7 @@ import pl.user.ScoreService;
 import pl.user.User;
 import pl.user.UserService;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
@@ -65,28 +62,30 @@ public class QuizService {
         User user = userService.getUser();
         Quiz quiz = getQuiz(quizId);
 
-        if(user == quiz.getUser()) {
-            List<Exercise> exercises = quiz.getExercises();
-            long sizeAfterFilter = getSizeAfterFilter(exercises);
-
-            if (sizeAfterFilter > 0) {
-                Optional<Exercise> exercise = exercises
-                        .stream()
-                        .filter(exercise1 -> !exercise1.isCorrect())
-                        .skip(ThreadLocalRandom.current().nextLong(sizeAfterFilter))
-                        .findFirst();
-
-                return exercise.get();
-            } else {
-                quiz.setDone(true);
-                quizRepository.save(quiz);
-                //TODO log quiz is done
-                return new Exercise();
-//                throw new QuizIsDone()//add exception
-            }
+        if (!(quiz.getUser().equals(user))) {
+            throw new AccessDeniedException("Access denied!");
         }
-        else{
-            throw new AccessDeniedException("Access Denied!");
+
+        List<Exercise> exercises = quiz.getExercises();
+        long sizeAfterFilter = getSizeAfterFilter(exercises);
+
+        if (sizeAfterFilter > 0) {
+            Exercise exercise = exercises
+                    .stream()
+                    .filter(exercise1 -> !exercise1.isCorrect())
+                    .skip(ThreadLocalRandom.current().nextLong(sizeAfterFilter))
+                    .findFirst()
+                    .orElseThrow(() -> {
+                        throw new NoSuchElementException("No such Exercise!");
+                     });
+
+            return exercise;
+        } else {
+            quiz.setDone(true);
+            quizRepository.save(quiz);
+            //TODO log quiz is done
+            return new Exercise();
+//            throw new QuizIsDone()//add exception
         }
     }
 
@@ -125,45 +124,22 @@ public class QuizService {
     }
 
 
-    //    TODO OPTIONAL, TEST IT !!!
-    public Quiz getQuiz(long quizId) throws IllegalArgumentException {
+    // TODO TEST IT !!!
+    public Quiz getQuiz(long quizId) {
         User user = userService.getUser();
 
-        Optional<Quiz> quiz = quizRepository.findById(quizId);
+        Quiz quiz = quizRepository.findById(quizId)
+                .orElseThrow(() ->{
+                    throw new NoSuchElementException("Not found quiz!");
+                });
 
-        return quiz.map(q->{
-           if(q.getUser()!=user)
-               throw new AccessDeniedException("Access denied!");
-           else
-               return q;
-        }).orElseThrow(() -> {
-            throw new NotFoundException("Not found quiz!");
-        });
+        if (!(quiz.getUser().equals(user))) {
+            throw new AccessDeniedException("Access denied!");
+        }
 
-//        return quiz.flatMap(quiz1 -> ? quiz1 -> quiz)
-//                    .flatMap()(q->{
-//            return q
-//        })
-//        quiz.ifPresent(q ->{
-//            if(q.getUser()==user){
-//                return q;
-//            }
-//            else{
-//                throw new AccessDeniedException("Access Denied!");
-//            }
-//        });
-//        quiz.orElseThrow(throw new IllegalAccessError("Quiz not found"))//notFoundExc TODO
-
-//        return quiz.flatMap(Quiz::getUser)
-//                .orElseThrow(new AccessDeniedException("Access Denied!"));
-
-//        if(user == quiz.get().getUser()) {
-//            return quiz.get();
-//        }
-//        else{
-//            throw new AccessDeniedException("Access Denied!");
-//        }
+        return quiz;
     }
+
 
 
     private long getSizeAfterFilter(List<Exercise> exercises) {
