@@ -12,7 +12,7 @@ import javax.swing.text.BadLocationException;
 import java.io.IOException;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8081")
+//@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 public class FileUploadController {
 
@@ -32,7 +32,6 @@ public class FileUploadController {
         String fileName = storageService.store(file);
         String fileExtension = storageService.getFileExtension(fileName);
         String data = dataService.getData(fileExtension, fileName);
-        System.out.print(data);
         List<ResultWord> resultWords = analyzeDataService.dataPreparation(data);
         return resultWords;
     }

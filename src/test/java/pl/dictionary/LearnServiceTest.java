@@ -6,7 +6,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+import pl.fileupload.StorageService;
 import pl.user.User;
 import pl.user.UserRepository;
 import pl.user.UserService;
@@ -18,6 +20,9 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class LearnServiceTest {
+
+    @MockBean
+    private StorageService storageService;
 
     @Autowired
     private UserRepository userRepository;
