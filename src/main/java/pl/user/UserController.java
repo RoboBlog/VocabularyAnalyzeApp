@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.other.Views;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "${origins}")
 @RequestMapping("/api/user")
 @RestController
 public class UserController {

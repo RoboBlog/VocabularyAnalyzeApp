@@ -19,7 +19,7 @@ import pl.security.service.JwtAuthenticationResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
-//@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "${origins}")
 @RestController
 public class AuthenticationRestController {
 
@@ -37,7 +37,7 @@ public class AuthenticationRestController {
     }
 
     @PostMapping(value = "${jwt.route.authentication.path}")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) {
         logger.debug("User {} crete authToken", authenticationRequest.getUsername());
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

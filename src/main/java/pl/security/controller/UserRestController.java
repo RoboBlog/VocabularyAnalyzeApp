@@ -9,7 +9,7 @@ import pl.security.JwtUser;
 
 import javax.servlet.http.HttpServletRequest;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "${origins}")
 @RestController
 public class UserRestController {
 

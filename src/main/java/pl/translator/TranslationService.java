@@ -1,11 +1,11 @@
 package pl.translator;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 
-@Repository
+@Service
 public class TranslationService {
     private final WordRepository wordRepository;
 
@@ -14,7 +14,7 @@ public class TranslationService {
         this.wordRepository = wordRepository;
     }
 
-//TODO logger
+    //TODO LOGEGER EXCEPTION HANDLER
     public String translateEnglishToPolish(String word){
         Word wordpolish = wordRepository.findByEnglishWord(word);
         if(wordpolish!= null) {

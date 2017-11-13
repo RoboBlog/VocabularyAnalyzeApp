@@ -9,3 +9,5 @@ jwt:
 
 scheduler:
   reset-day-score: 0 0 12 * * ?
+
+origins: http://localhost:8081

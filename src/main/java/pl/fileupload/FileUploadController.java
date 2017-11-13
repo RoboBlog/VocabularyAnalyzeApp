@@ -12,7 +12,7 @@ import javax.swing.text.BadLocationException;
 import java.io.IOException;
 import java.util.List;
 
-//@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "${origins}")
 @RestController
 public class FileUploadController {
 

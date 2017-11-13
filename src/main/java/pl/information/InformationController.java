@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "${origins}")
 @RestController
 @RequestMapping("/api/information")
 public class InformationController {
@@ -21,7 +21,6 @@ public class InformationController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/all")
     public List<Information> getAllInformations(Authentication authentication) {
-        System.out.println(authentication.getAuthorities());
         List<Information> allInformations = informationService.getAllInformations();
         return allInformations;
     }

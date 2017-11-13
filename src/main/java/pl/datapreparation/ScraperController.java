@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "${origins}")
 @RestController
 @Validated
 public class ScraperController {
@@ -33,7 +33,6 @@ public class ScraperController {
             Document website = webScraperService.getWebsite(url);
             String websiteBodyInString = webScraperService.parseHtmlDataToString(website);
             List<ResultWord> stringIntegerMap = analyzeDataService.dataPreparation(websiteBodyInString);
-        System.out.println(stringIntegerMap);
 
         return stringIntegerMap;
     }

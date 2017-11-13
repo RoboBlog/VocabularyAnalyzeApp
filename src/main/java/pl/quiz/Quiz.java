@@ -18,7 +18,6 @@ public class Quiz {
     private List<Exercise> exercises = new ArrayList<>();
     private boolean done;
 
-    //TODO cascade
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 

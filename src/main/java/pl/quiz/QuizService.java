@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.dictionary.UserDictionariesService;
 import pl.dictionary.UserDictionary;
 import pl.dictionary.UserWord;
+import pl.other.QuizIsDoneException;
 import pl.translator.Word;
 import pl.user.ScoreService;
 import pl.user.User;
@@ -81,9 +82,8 @@ public class QuizService {
         } else {
             quiz.setDone(true);
             quizRepository.save(quiz);
-            //TODO log quiz is done
-            return new Exercise();
-//            throw new QuizIsDone()//add exception
+            //TODO LOGGER AND HANDLER EXCEPTION
+            throw new QuizIsDoneException("Quiz is done!");
         }
     }
 
@@ -122,7 +122,7 @@ public class QuizService {
         return response;
     }
 
-
+    //LOGGER
     public Quiz getQuiz(long quizId) {
         User user = userService.getUser();
 

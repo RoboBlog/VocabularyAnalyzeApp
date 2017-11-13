@@ -1,6 +1,7 @@
 package pl.dictionary;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import pl.translator.Word;
 import pl.translator.WordRepository;
@@ -29,7 +30,7 @@ public class DictionaryService {
         this.learnService = learnService;
     }
 
-    //TODO ROLE ADMIN
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Set<UserWord> getAll(long dictionaryId) {
         UserDictionary dictionary = userDictionariesService.getDictionary(dictionaryId);
         Set<UserWord> words = dictionary.getWords();

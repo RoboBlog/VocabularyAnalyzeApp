@@ -15,7 +15,6 @@ import java.util.*;
 
 
 
-//TODO Refactor this?
 @Entity
 @Table(name = "user")
 public class User {
@@ -277,7 +276,6 @@ public class User {
         return "User{" +
                 "userId=" + userId +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", enabled=" + enabled +
                 ", activationCode='" + activationCode + '\'' +

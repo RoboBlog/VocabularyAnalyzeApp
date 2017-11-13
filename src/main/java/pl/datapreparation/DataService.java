@@ -22,7 +22,6 @@ import java.util.Scanner;
 @Service
 public class DataService {
 
-    //TODO how to mock this and write test?
     String fileLocation = "upload-dir/";
 
 

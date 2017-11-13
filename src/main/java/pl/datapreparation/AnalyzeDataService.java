@@ -29,13 +29,10 @@ public class AnalyzeDataService {
             map.put(word,(count==null)?1:count+1);
 
         }
-        System.out.println(map);
-
 
         Map<Word, Integer> result = new HashMap<>();
 
         List<Word> allByEnglishWord = wordRepository.findByEnglishWordIn(words);
-//        Optional<List<Word>> allByEnglishWord = wordRepository.findByEnglishWordIn(words);
 
         allByEnglishWord.forEach(word ->{
            String englishWord = word.getEnglishWord();
@@ -43,18 +40,13 @@ public class AnalyzeDataService {
            result.put(word, integer);
         });
 
-        System.out.println(result);
-
         Map<Word, Integer> result2 = result.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
-        //TODO FIX IT
         List<ResultWord> resultWords = new LinkedList<>();
 
-        result2.forEach((r,k)->{
-            resultWords.add(new ResultWord(r, k));
-        });
+        result2.forEach((r,k)-> resultWords.add(new ResultWord(r, k)));
 
         return resultWords;
     }

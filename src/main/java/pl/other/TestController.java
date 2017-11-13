@@ -12,7 +12,7 @@ import pl.translator.WordRepository;
 import pl.user.ScoreService;
 
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "${origins}")
 @RestController
 @RequestMapping("/")
 public class TestController {

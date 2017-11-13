@@ -17,7 +17,7 @@ import java.util.Date;
 
 import static pl.security.AuthorityName.ROLE_USER;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "${origins}")
 @RestController
 public class SignUpController {
 
