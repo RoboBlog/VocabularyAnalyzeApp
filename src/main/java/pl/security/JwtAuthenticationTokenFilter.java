@@ -3,6 +3,8 @@ package pl.security;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +22,7 @@ import java.io.IOException;
 
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
-    private final Log logger = LogFactory.getLog(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(JwtAuthenticationTokenFilter.class);
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -44,17 +46,17 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 logger.error("an error occured during getting username from token", e);
             }
         }
-        else {
-            logger.warn("couldn't find bearer string, will ignore the header");
-        }
+//        else {
+//            logger.warn("couldn't find bearer string, will ignore the header");
+//        }
 
-        logger.info("checking authentication for user " + username);
+//        logger.info("checking authentication for user " + username);
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
             if (jwtTokenUtil.validateToken(authToken, userDetails)) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                logger.info("authenticated user " + username + ", setting security context");
+//                logger.info("authenticated user " + username + ", setting security context");
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }

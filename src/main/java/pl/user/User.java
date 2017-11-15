@@ -1,6 +1,8 @@
 package pl.user;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.Email;
 import pl.dictionary.UserDictionary;
@@ -15,6 +17,7 @@ import java.util.*;
 
 
 
+//TODO Refactor this?
 @Entity
 @Table(name = "user")
 public class User {
@@ -46,9 +49,9 @@ public class User {
     @JsonView(Views.Internal.class)
     private String activationCode;
 
-    @OneToMany
-    @JsonView(Views.Public.class)
-    private List<UserDictionary> dictionaries;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<UserDictionary> dictionaries = new LinkedList<>();
 
     @JsonView(Views.Public.class)
     private long amountWords;
@@ -87,6 +90,7 @@ public class User {
 //        return serialVersionUID;
 //    }
 
+
     public User(User user) {
         this.userId = user.userId;
         this.username = user.username;
@@ -118,6 +122,7 @@ public class User {
     public void addQuiz(Quiz quiz){
         quizes.add(quiz);
     }
+
     public List<Quiz> getQuizes() {
         return quizes;
     }
@@ -130,7 +135,7 @@ public class User {
         return dictionaries;
     }
 
-    public void addDictionaries(UserDictionary dictionary){
+    public void addDictionary(UserDictionary dictionary){
         this.dictionaries.add(dictionary);
     }
     public void setDictionaries(List<UserDictionary> dictionaries) {

@@ -33,13 +33,11 @@ public class UserDictionariesService {
         return dictionaries;
     }
 
+    //TODO AAA
     public void addDictionary(String name){
         User user = userService.getUser();
-        UserDictionary dictionary = new UserDictionary(name);
-        user.addDictionaries(dictionary);
+        UserDictionary dictionary = new UserDictionary(name, user);
         userDictionaryRepository.save(dictionary);
-        userRepository.save(user);
-
     }
 
     public void removeDictionary(long dictionaryId){
@@ -57,6 +55,7 @@ public class UserDictionariesService {
         UserDictionary dictionary = userDictionaryRepository.getById(dictionaryId);
         return dictionary;
     }
+
 
     public void save(UserDictionary userDictionary){
         userDictionaryRepository.save(userDictionary);

@@ -1,5 +1,6 @@
 package pl.dictionary;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import pl.user.User;
 
 import javax.persistence.*;
@@ -12,14 +13,21 @@ public class UserDictionary {
     @Id
     @GeneratedValue
     private long id;
+
     @NotNull
     private String name;
+
     @OneToMany
     private Set<UserWord> words = new HashSet<>();
 
-    //It is good ?
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+
+    public UserDictionary(String name, User user) {
+        this.name = name;
+        this.user = user;
+    }
 
     public User getUser() {
         return user;

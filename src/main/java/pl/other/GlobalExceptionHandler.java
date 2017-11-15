@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 @Component
 public class GlobalExceptionHandler {
-    private final Logger logger = LoggerFactory.getLogger(ResetDayScores.class);
+    private final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler
     @ResponseBody
