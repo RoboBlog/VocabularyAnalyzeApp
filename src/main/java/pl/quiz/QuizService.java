@@ -91,6 +91,7 @@ public class QuizService {
     public String checkAnswer(long exerciseId, String answer, String type) {
         String response = "is Correct";
         Exercise exercise = exerciseRepository.findExerciseById(exerciseId);
+        System.out.println(exercise);
         exercise.setAnswer(answer);
         UserWord userWord = exercise.getUserWord();
         Word word = exercise.getUserWord().getWord();
